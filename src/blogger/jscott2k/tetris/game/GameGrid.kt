@@ -16,7 +16,6 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     private val spawnPoint: Vec2Int = Vec2Int(x = 0, y = 4)
     private val gravityDirection: Direction = Direction.DOWN
 
-
     fun getRowDeathRange():IntRange{
         return this.rowDeathRange
     }

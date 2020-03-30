@@ -7,10 +7,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
