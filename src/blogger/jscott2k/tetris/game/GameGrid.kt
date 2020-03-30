@@ -10,13 +10,11 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     private val rowDeathRange:IntRange = 0 until 3
     private val colDeathRange:IntRange = 0 until cols
     private val tetrominos: ArrayList<Tetromino> = ArrayList()
-    private val displayMap: Array<Array<Char>> = Array(rows){Array(cols){' '}}
+    private val display: Array<Array<Char>> = Array(rows){Array(cols){' '}}
     private val colDisplayRange: IntRange = 0 until cols
     private val rowDisplayRange: IntRange = 2 until rows //First two rows hidden
-    private val spawnPoint: Vec2Int =
-        Vec2Int(x = 0, y = 4)
-    private val gravityDirection: Direction =
-        Direction.DOWN
+    private val spawnPoint: Vec2Int = Vec2Int(x = 0, y = 4)
+    private val gravityDirection: Direction = Direction.DOWN
 
 
     fun getRowDeathRange():IntRange{
@@ -61,15 +59,15 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         val vec2Ints:Array<Vec2Int> = tetromino.getGridPointsOfPieces()
         val charIdentifier:Char = tetromino.getCharIdentifier()
         vec2Ints.forEach {
-            displayMap[it.x][it.y] = charIdentifier
+            display[it.x][it.y] = charIdentifier
         }
     }
 
     fun getCharAtPoint(row:Int, col:Int): Char? {
-        return displayMap[row][col]
+        return display[row][col]
     }
     fun getCharAtPoint(point: Vec2Int): Char? {
-        return displayMap[point.x][point.y]
+        return display[point.x][point.y]
     }
     fun getPieceAtPoint(point: Vec2Int): TetrominoTile?{
         tetrominos.forEach {
@@ -103,7 +101,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             print("# ")
 
             for (col: Int in colDisplayRange) {
-                print("${displayMap[row][col]} ")
+                print("${display[row][col]} ")
             }
             print("#")
             println()
@@ -116,7 +114,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     fun clear() {
         for (row: Int in rowDisplayRange) {
             for (col: Int in colDisplayRange) {
-                displayMap[row][col] = ' '
+                display[row][col] = ' '
             }
         }
     }

@@ -6,7 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="" />
+    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -25,10 +30,14 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1Zlpuf6gLQrEt4BAF7zodemcxpd" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -36,6 +45,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/build" />
     <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
@@ -181,22 +191,6 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="322" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1585519451451" />
-    <state width="1495" height="143" key="GridCell.Tab.0.bottom" timestamp="1585518401235">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1495" height="143" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585518401235" />
-    <state width="1495" height="143" key="GridCell.Tab.0.center" timestamp="1585518401235">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1495" height="143" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1585518401235" />
-    <state width="1495" height="143" key="GridCell.Tab.0.left" timestamp="1585518401235">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1495" height="143" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1585518401235" />
-    <state width="1495" height="143" key="GridCell.Tab.0.right" timestamp="1585518401235">
-      <screen x="0" y="0" width="1536" height="824" />
-    </state>
-    <state width="1495" height="143" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1585518401235" />
     <state width="1495" height="182" key="GridCell.Tab.1.bottom" timestamp="1585474419588">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -217,9 +211,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1585454349786" />
-    <state x="409" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585486589084">
+    <state x="409" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585571056316">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585571056316" />
     <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486589084" />
     <state x="94" y="0" key="new project wizard" timestamp="1585439219793">
       <screen x="0" y="0" width="1536" height="824" />
