@@ -3,6 +3,7 @@ package blogger.jscott2k.tetris.game
 import blogger.jscott2k.tetris.tetromino.Tetromino
 import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
+import com.sun.org.apache.xpath.internal.operations.Bool
 
 /**
  * This class will manage all aspects the tetris game.
@@ -21,37 +22,37 @@ object GameManager {
     private val COLS: Int = 10
     private var player: Player = Player()
 
-
-    private var grid: GameGrid =
-        GameGrid(
-            ROWS,
-            COLS
-        )
+    private var grid: GameGrid = GameGrid(ROWS, COLS)
     private var isRunning: Boolean = false
+    private var allowAdditionalInput:Boolean = false
 
     fun start() {
         println("Starting...")
 
         //Initialize input actions
-        InputManager.addInputAction(key = "end") {
+        InputManager.addInputAction(key = "end") {args ->
             end()
+            return@addInputAction true
         }
-        InputManager.addInputAction(key = "rotate") {
-            args ->  player.rotate(directionString = args[0])
+        InputManager.addInputAction(key = "rotate") {args ->
+            player.rotate(directionString = args[0])
+            return@addInputAction false
         }
         InputManager.addInputAction(key = "move") { args ->
             player.move(directionString = args[0])
+            return@addInputAction false
         }
-        InputManager.addInputAction(key = "shove") {
+        InputManager.addInputAction(key = "shove") {args ->
             grid.shove()
+            return@addInputAction false
         }
-        InputManager.addInputAction(key = "only") {
-            args ->
+        InputManager.addInputAction(key = "only") { args ->
                 val onlySchemes:MutableList<TetrominoScheme> = mutableListOf()
                 args.forEach {
-                    onlySchemes.add(TetrominoScheme.valueOf(it))
+                    onlySchemes.add(TetrominoScheme.valueOf(it.toUpperCase()))
                 }
                 TetrominoScheme.setAllowedSchemes(onlySchemes)
+            return@addInputAction true
         }
 
         //Clear grid
@@ -107,12 +108,10 @@ object GameManager {
         return true
     }
 
-    fun input() {
+    private fun input(): Boolean {
         print(">> ")
-        val input: String? = readLine()
-        if (input != null) {
-            InputManager.invoke(input)
-        }
+        val input: String = readLine() ?: ""
+        return InputManager.invoke(input)
     }
 
     /**
@@ -130,10 +129,12 @@ object GameManager {
      * Each frame has 4 processes. Clear, Update, Display, and User Input
      */
     fun nextFrame() {
-        grid.clear()
-        grid.update()
-        grid.display()
-        input()
+        if(!allowAdditionalInput){
+            grid.clear()
+            grid.update()
+            grid.display()
+        }
+        allowAdditionalInput = input()
     }
     fun getGrid(): GameGrid {
         return grid

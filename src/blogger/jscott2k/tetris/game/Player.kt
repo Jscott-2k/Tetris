@@ -9,14 +9,9 @@ class Player{
 
     private var tetromino: Tetromino? = null
     fun move(directionString: String):Boolean{
-        try{
-            val direction: Direction = Direction.valueOf(directionString.toUpperCase())
-            tetromino?.shift(direction)
-            return true
-        }catch(e:IllegalArgumentException){
-            println("Invalid Argument {$directionString}!")
-        }
-        return false
+        val direction: Direction = Direction.valueOf(directionString.toUpperCase())
+        tetromino?.shift(direction)
+        return true
     }
     fun setTetromino(tetromino: Tetromino){
         this.tetromino = tetromino
