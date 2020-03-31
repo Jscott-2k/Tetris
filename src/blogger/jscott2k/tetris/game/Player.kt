@@ -24,10 +24,14 @@ class Player{
     fun getTetromino(): Tetromino?{
         return this.tetromino
     }
+
     fun getIsGrounded():Boolean{
         return if(tetromino!=null){
+
             tetromino!!.getIsGrounded()
+
         } else{
+
             false
         }
     }

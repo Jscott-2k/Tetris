@@ -30,7 +30,7 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     fun shift(direction: Direction, shiftPoint: Vec2Int): ShiftStatus {
 
         potentialPoint = (this.point + shiftPoint)
-        val potentialCollidedTile: TetrominoTile? = grid.getPieceAtPoint(potentialPoint)
+        val potentialCollidedTile: TetrominoTile? = grid.getTileAtPoint(potentialPoint)
 
         if(parent.getIsGrounded()){
             return ShiftStatus.GROUNDED
@@ -46,7 +46,6 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             return ShiftStatus.OUTSIDE_ROW_BOTTOM
         }
         else if(potentialPoint.x < 0){
-
             return ShiftStatus.OUTSIDE_ROW_TOP
         }
         else if(potentialCollidedTile!=null && potentialCollidedTile.parent != this.parent){
