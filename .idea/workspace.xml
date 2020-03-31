@@ -6,20 +6,22 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="Reworked input manager. Better exception handling. Allow multiple inputs on certain exceptions or accidental inputs. Allow additional inputs after certain commands before next grid update.">
+    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$2.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$5.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoTile.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoArrangement.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoArrangement.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/Vec2Int.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/Vec2Int.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,6 +44,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="=" />
         <option value="Justin Scott" />
       </list>
     </option>
@@ -190,13 +193,21 @@
       <option name="project" value="LOCAL" />
       <updated>1585675699026</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=" - Reworked input manager and exception handling&#10; - Changed GameManager nextFrame() to allow multiple inputs on certain exceptions or accidental inputs&#10; - Added return for input manager actions">
+      <created>1585678843620</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1585678843620</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Updated spawn point to offset by pivots. Implemented &quot;only&quot; command to restrict to specific tetromino schemes for testing purposes. Added subtraction operator for Vec2Int" />
     <MESSAGE value="Fixed specific game crash when 'I' tetromino is spawned. Refactored Tetromino, GameGrid and GameManager. Additions to tetromino." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed specific game crash when 'I' tetromino is spawned. Refactored Tetromino, GameGrid and GameManager. Additions to tetromino." />
+    <MESSAGE value=" - Reworked input manager and exception handling&#10; - Changed GameManager nextFrame() to allow multiple inputs on certain exceptions or accidental inputs&#10; - Added return for input manager actions" />
+    <option name="LAST_COMMIT_MESSAGE" value=" - Reworked input manager and exception handling&#10; - Changed GameManager nextFrame() to allow multiple inputs on certain exceptions or accidental inputs&#10; - Added return for input manager actions" />
   </component>
   <component name="WindowStateProjectService">
     <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585454293471">
@@ -233,10 +244,14 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="248" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585669412916" />
-    <state x="2015" y="14" width="1719" height="957" key="CommitChangelistDialog2" timestamp="1585678596366">
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2" timestamp="1585689842899">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2015" y="14" width="1719" height="957" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585678596366" />
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689842899" />
+    <state x="2252" y="175" key="DiffContextDialog" timestamp="1585689643218">
+      <screen x="1920" y="0" width="1920" height="1040" />
+    </state>
+    <state x="2252" y="175" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689643218" />
     <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585454339148">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -245,41 +260,41 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="322" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1585519451451" />
-    <state width="1495" height="-12" key="GridCell.Tab.0.bottom" timestamp="1585678371762">
+    <state width="1495" height="58" key="GridCell.Tab.0.bottom" timestamp="1585689221764">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="-12" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585678371762" />
-    <state width="1495" height="-12" key="GridCell.Tab.0.center" timestamp="1585678371762">
+    <state width="1495" height="58" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689221764" />
+    <state width="1495" height="58" key="GridCell.Tab.0.center" timestamp="1585689221763">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="-12" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585678371762" />
-    <state width="1495" height="-12" key="GridCell.Tab.0.left" timestamp="1585678371761">
+    <state width="1495" height="58" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689221763" />
+    <state width="1495" height="58" key="GridCell.Tab.0.left" timestamp="1585689221763">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="-12" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585678371761" />
-    <state width="1495" height="-12" key="GridCell.Tab.0.right" timestamp="1585678371762">
+    <state width="1495" height="58" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689221763" />
+    <state width="1495" height="58" key="GridCell.Tab.0.right" timestamp="1585689221763">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="-12" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585678371762" />
-    <state width="1495" height="240" key="GridCell.Tab.1.bottom" timestamp="1585676294038">
+    <state width="1495" height="58" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585689221763" />
+    <state width="1495" height="75" key="GridCell.Tab.1.bottom" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="240" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585676294038" />
+    <state width="1495" height="75" key="GridCell.Tab.1.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585684562981" />
     <state width="1495" height="182" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1585474419588" />
-    <state width="1495" height="240" key="GridCell.Tab.1.center" timestamp="1585676294038">
+    <state width="1495" height="75" key="GridCell.Tab.1.center" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="240" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585676294038" />
+    <state width="1495" height="75" key="GridCell.Tab.1.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585684562981" />
     <state width="1495" height="182" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1585474419588" />
-    <state width="1495" height="240" key="GridCell.Tab.1.left" timestamp="1585676294038">
+    <state width="1495" height="75" key="GridCell.Tab.1.left" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="240" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585676294038" />
+    <state width="1495" height="75" key="GridCell.Tab.1.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585684562981" />
     <state width="1495" height="182" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1585474419588" />
-    <state width="1495" height="240" key="GridCell.Tab.1.right" timestamp="1585676294038">
+    <state width="1495" height="75" key="GridCell.Tab.1.right" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="240" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585676294038" />
+    <state width="1495" height="75" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585684562981" />
     <state width="1495" height="182" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1585474419588" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1585454349786">
       <screen x="0" y="0" width="1536" height="824" />
@@ -306,10 +321,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="425" y="187" key="run.anything.popup/0.0.1536.824@0.0.1536.824" timestamp="1585456673271" />
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1585675237713">
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1585685330793">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585675237713" />
+    <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585685330793" />
     <state x="431" y="145" width="672" height="678" key="search.everywhere.popup/0.0.1536.824@0.0.1536.824" timestamp="1585482200227" />
   </component>
 </project>

@@ -23,6 +23,21 @@ class Tetromino(private val grid: GameGrid){
         return tile
     }
 
+    fun getTiles():MutableList<TetrominoTile>{
+        return tiles
+    }
+
+    fun getTilesAtOrAboveRow(row:Int):MutableList<TetrominoTile>{
+
+        val atiles:MutableList<TetrominoTile> = mutableListOf()
+
+        tiles.forEach {
+            if(it.getPoint().x <= row){
+                atiles.add(it)
+            }
+        }
+        return atiles
+    }
 
     init{
         println("Created new Tetromino")
@@ -144,15 +159,13 @@ class Tetromino(private val grid: GameGrid){
         return tiles[0]
     }
 
-    fun removeTileAt(point: Vec2Int) {
+    fun getTilesLeft():Int{
+        return tiles.size
+    }
 
-        val tile:TetrominoTile? = tiles.find {
-            it.getPoint() == point
-        }
-
-        if (tile != null) {
-            tiles.remove(tile)
-        }
-
+    fun removeTileAt(point: Vec2Int):TetrominoTile? {
+        val tile: TetrominoTile = tiles.find {it.getPoint() == point} ?: return null
+        tiles.remove(tile)
+        return tile
     }
 }

@@ -3,7 +3,6 @@ package blogger.jscott2k.tetris.game
 import blogger.jscott2k.tetris.tetromino.Tetromino
 import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
-import com.sun.org.apache.xpath.internal.operations.Bool
 
 /**
  * This class will manage all aspects the tetris game.

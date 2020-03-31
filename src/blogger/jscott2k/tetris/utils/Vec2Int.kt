@@ -22,5 +22,4 @@ data class Vec2Int(val x: Int, val y:Int){
         result = 31 * result + y
         return result
     }
-
 }

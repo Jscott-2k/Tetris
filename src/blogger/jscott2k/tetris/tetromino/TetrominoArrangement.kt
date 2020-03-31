@@ -7,11 +7,8 @@ data class TetrominoArrangement(val configure:Array<BooleanArray>) {
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (javaClass != other?.javaClass) return false
-
         other as TetrominoArrangement
-
         if (!configure.contentDeepEquals(other.configure)) return false
-
         return true
     }
 
