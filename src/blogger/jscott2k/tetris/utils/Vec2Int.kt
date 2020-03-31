@@ -11,6 +11,9 @@ data class Vec2Int(val x: Int, val y:Int){
     operator fun plus(other: Vec2Int): Vec2Int {
         return Vec2Int(x = x + other.x, y = y + other.y)
     }
+    operator fun minus(other: Vec2Int): Vec2Int {
+        return Vec2Int(x = x - other.x, y = y - other.y)
+    }
     operator fun times(other: Vec2Int): Vec2Int {
         return Vec2Int(x = x * other.x, y = y * other.y)
     }

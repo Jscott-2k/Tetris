@@ -1,6 +1,7 @@
 package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.tetromino.Tetromino
+import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 
 /**
  * This class will manage all aspects the tetris game.
@@ -32,22 +33,26 @@ object GameManager {
 
 
         //Initialize input actions
-        InputManager.addInputAction(key = "end") { end() }
-
+        InputManager.addInputAction(key = "end") {
+            end()
+        }
         InputManager.addInputAction(key = "rotate") {
             args ->  player.rotate(directionString = args[0])
         }
-
         InputManager.addInputAction(key = "move") { args ->
             player.move(directionString = args[0])
         }
-
-        InputManager.addInputAction(key = "shove") { grid.shove() }
-
-        InputManager.addInputAction(key = "only") {
-
+        InputManager.addInputAction(key = "shove") {
+            grid.shove()
         }
-
+        InputManager.addInputAction(key = "only") {
+            args ->
+                val onlySchemes:MutableList<TetrominoScheme> = mutableListOf()
+                args.forEach {
+                    onlySchemes.add(TetrominoScheme.valueOf(it))
+                }
+                TetrominoScheme.setAllowedSchemes(onlySchemes)
+        }
 
         //Clear grid
         grid.clear()

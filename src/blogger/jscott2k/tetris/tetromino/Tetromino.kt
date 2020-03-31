@@ -35,7 +35,7 @@ class Tetromino(private val grid: GameGrid){
 
     private fun setTilePointFromScheme(index:Int, tile: TetrominoTile) {
         tile.setIsPivot(scheme.getGridPoint(index) == scheme.getPivotPoint())
-        val spawnPoint: Vec2Int = scheme.getGridPoint(index) + grid.getSpawnPoint()
+        val spawnPoint: Vec2Int = (scheme.getGridPoint(index) + grid.getSpawnPoint()) - scheme.getPivotPoint()
         tile.setPoint(point = spawnPoint)
 
     }
