@@ -1,16 +1,26 @@
 package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
-import blogger.jscott2k.tetris.enums.ShiftStatus
 import blogger.jscott2k.tetris.tetromino.Tetromino
 import java.lang.IllegalArgumentException
+import java.lang.NumberFormatException
+import kotlin.math.absoluteValue
 
 class Player{
 
     private var tetromino: Tetromino? = null
-    fun move(directionString: String):Boolean{
+    private val MAX_SHIFTS_PER_FRME:Int = 3
+
+    fun move(directionString: String, amount: String):Boolean{
+
+        val amountAsInt:Int = amount.toInt()
+        amountAsInt.coerceIn(minimumValue = 1,maximumValue = MAX_SHIFTS_PER_FRME)
         val direction: Direction = Direction.valueOf(directionString.toUpperCase())
-        tetromino?.shift(direction)
+
+        for(i:Int in 1..amountAsInt){
+            tetromino?.shift(direction)
+        }
+
         return true
     }
     fun setTetromino(tetromino: Tetromino){
@@ -28,19 +38,11 @@ class Player{
         }
     }
 
-    fun rotate(directionString: String) {
-        try{
-            val directionStringFormatted:String = directionString.toUpperCase()
-            val direction:Direction = Direction.valueOf(directionStringFormatted)
-
-            if(direction == Direction.RIGHT)
-                tetromino?.rotate(1)
-            else{
-                tetromino?.rotate(-1)
-            }
-
-        }catch(e:IllegalArgumentException){
-            println("Invalid Argument! {$directionString}")
+    fun rotate(rotationDirection: String, amount:String) {
+        if(rotationDirection.toUpperCase() == "LEFT")
+            tetromino?.rotate(-(amount.toInt().absoluteValue))
+        else{
+            tetromino?.rotate(amount.toInt().absoluteValue)
         }
     }
 }

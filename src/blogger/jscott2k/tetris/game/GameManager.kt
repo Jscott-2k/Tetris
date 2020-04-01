@@ -25,6 +25,10 @@ object GameManager {
     private var isRunning: Boolean = false
     private var allowAdditionalInput:Boolean = false
 
+    fun getDefaultTile():TetrominoTile{
+        return TetrominoTile(Tetromino(grid), grid = grid)
+    }
+
     fun start() {
         println("Starting...")
 
@@ -34,11 +38,15 @@ object GameManager {
             return@addInputAction true
         }
         InputManager.addInputAction(key = "rotate") {args ->
-            player.rotate(directionString = args[0])
+            player.rotate(rotationDirection = args.getOrElse(index = 0){"RIGHT"}, amount = args.getOrElse(index = 1){"1"})
             return@addInputAction false
         }
         InputManager.addInputAction(key = "move") { args ->
-            player.move(directionString = args[0])
+
+            player.move(
+                directionString = (args.getOrElse(index = 0){"DOWN"}),
+                amount = (args.getOrElse(index = 1){"1"})
+            )
             return@addInputAction false
         }
         InputManager.addInputAction(key = "shove") {args ->
@@ -145,4 +153,5 @@ object GameManager {
     fun getPlayer():Player{
         return player
     }
+
 }

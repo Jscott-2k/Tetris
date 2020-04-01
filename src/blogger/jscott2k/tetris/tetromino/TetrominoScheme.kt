@@ -104,17 +104,17 @@ enum class TetrominoScheme(
             configure =
             arrayOf(
                 booleanArrayOf(
-                    X, P, X, X
+                    P, X, X, X
                 ), booleanArrayOf(
-                    X, P, X, X
-                ), booleanArrayOf(
-                    P, P, X, X
+                    P, P, P, P
+                ),  booleanArrayOf(
+                    X, X, X, X
                 ), booleanArrayOf(
                     X, X, X, X
                 )
             )
         ),
-        charIdentifier = 'J', pivotPoint = Vec2Int(1, 1)
+        charIdentifier = 'J', pivotPoint = Vec2Int(1, 2)
 
     ),
     L(
@@ -122,11 +122,11 @@ enum class TetrominoScheme(
             configure =
             arrayOf(
                 booleanArrayOf(
-                    X, P, X, X
+                    X, X, X, P
                 ), booleanArrayOf(
-                    X, P, X, X
+                    X, P, P, P
                 ), booleanArrayOf(
-                    X, P, P, X
+                    X, X, X, X
                 ), booleanArrayOf(
                     X, X, X, X
                 )

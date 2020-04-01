@@ -3,7 +3,8 @@ package blogger.jscott2k.tetris.tetromino
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.game.GameGrid
 import blogger.jscott2k.tetris.utils.Vec2Int
-import blogger.jscott2k.tetris.enums.ShiftStatus
+import blogger.jscott2k.tetris.enums.TileStatus
+import blogger.jscott2k.tetris.utils.RotationMatrix
 
 class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
 
@@ -11,7 +12,7 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     private var potentialPoint: Vec2Int = Vec2Int(x = 0, y = 0)
     private var isPivot:Boolean = false
     private var isGrounded:Boolean = false
-    private var shiftStatus:ShiftStatus = ShiftStatus.WAITING
+    private var tileStatus:TileStatus = TileStatus.WAITING
 
     fun setIsGrounded(isGrounded:Boolean){
         this.isGrounded = isGrounded
@@ -29,35 +30,56 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
         return point
     }
 
-    private fun shift(direction: Direction, shiftPoint: Vec2Int): ShiftStatus {
-
-        potentialPoint = (this.point + shiftPoint)
+    private fun getTranslationStatus(direction: Direction):TileStatus {
         val potentialCollidedTile: TetrominoTile? = grid.getTileAtPoint(potentialPoint)
 
-        if(parent.getIsGrounded() && parent.getIsPreservedForm()){
-            return ShiftStatus.GROUNDED_WITH_FORM_PRESERVED
-        }else if((!parent.getIsPreservedForm()) && (this.isGrounded)){
-            return ShiftStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
+        return when {
+            parent.getIsGrounded() && parent.getIsPreservedForm() -> TileStatus.GROUNDED_WITH_FORM_PRESERVED
+            (!parent.getIsPreservedForm()) && (this.isGrounded) -> TileStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
+
+            potentialPoint.y >= grid.getCols() -> TileStatus.OUTSIDE_COLUMN_RIGHT
+            potentialPoint.y < 0 -> TileStatus.OUTSIDE_COLUMN_LEFT
+
+            potentialPoint.x >= grid.getRows() -> {
+                this.onTileBottomRowCollision()
+                TileStatus.OUTSIDE_ROW_BOTTOM
+            }
+            potentialPoint.x < 0 -> TileStatus.OUTSIDE_ROW_TOP
+
+            potentialCollidedTile != null -> this.onTileTileCollision(direction, potentialCollidedTile)
+            else -> TileStatus.SUCCESS
         }
-        else if(potentialPoint.y >= grid.getCols() ){
-            return ShiftStatus.OUTSIDE_COLUMN_RIGHT
-        }
-        else if(potentialPoint.y < 0){
-            return ShiftStatus.OUTSIDE_COLUMN_LEFT
-        }
-        else if(potentialPoint.x >= grid.getRows()){
-            this.onTileBottomRowCollision()
-            return ShiftStatus.OUTSIDE_ROW_BOTTOM
-        }
-        else if(potentialPoint.x < 0){
-            return ShiftStatus.OUTSIDE_ROW_TOP
-        }
-        else if(potentialCollidedTile!=null){
-            return this.onTileTileCollision(direction, potentialCollidedTile)
-        }
-        else{
-            return ShiftStatus.SUCCESS
-        }
+
+//        if(parent.getIsGrounded() && parent.getIsPreservedForm()){
+//            return TileStatus.GROUNDED_WITH_FORM_PRESERVED
+//        }else if((!parent.getIsPreservedForm()) && (this.isGrounded)){
+//            return TileStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
+//        }
+//        else if(potentialPoint.y >= grid.getCols() ){
+//            return TileStatus.OUTSIDE_COLUMN_RIGHT
+//        }
+//        else if(potentialPoint.y < 0){
+//            return TileStatus.OUTSIDE_COLUMN_LEFT
+//        }
+//        else if(potentialPoint.x >= grid.getRows()){
+//            this.onTileBottomRowCollision()
+//            return TileStatus.OUTSIDE_ROW_BOTTOM
+//        }
+//        else if(potentialPoint.x < 0){
+//            return TileStatus.OUTSIDE_ROW_TOP
+//        }
+//        else if(potentialCollidedTile!=null){
+//            return this.onTileTileCollision(direction, potentialCollidedTile)
+//        }
+//        else{
+//            return TileStatus.SUCCESS
+//        }
+//    }
+    }
+    private fun shift(direction: Direction, shiftPoint: Vec2Int): TileStatus {
+
+        potentialPoint = (this.point + shiftPoint)
+        return getTranslationStatus(direction)
     }
 
     private fun onTileBottomRowCollision(){
@@ -67,36 +89,36 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             this.isGrounded = true
         }
     }
-    private fun downTileTileCollision(otherTile:TetrominoTile):ShiftStatus{
+    private fun downTileTileCollision(otherTile:TetrominoTile):TileStatus{
         if(parent.getIsPreservedForm()){
             if(otherTile.parent == parent){
-                return ShiftStatus.SUCCESS
+                return TileStatus.SUCCESS
             }
             parent.setIsGrounded(true)
         }else{
             this.isGrounded = true
         }
 
-        return ShiftStatus.COLLISION_WITH_TILE
+        return TileStatus.COLLISION_WITH_TILE
     }
 
 
-    private fun tileTileCollision(otherTile: TetrominoTile):ShiftStatus{
+    private fun tileTileCollision(otherTile: TetrominoTile):TileStatus{
         return if(otherTile.parent == parent){
-             ShiftStatus.SUCCESS
+             TileStatus.SUCCESS
         }else{
-            ShiftStatus.COLLISION_WITH_TILE
+            TileStatus.COLLISION_WITH_TILE
         }
 
     }
 
-    private fun onTileTileCollision(direction:Direction, otherTile:TetrominoTile):ShiftStatus{
+    private fun onTileTileCollision(direction:Direction, otherTile:TetrominoTile):TileStatus{
 
         return when(direction){
             Direction.DOWN -> downTileTileCollision(otherTile)
             Direction.RIGHT -> tileTileCollision(otherTile)
             Direction.LEFT -> tileTileCollision(otherTile)
-            else -> ShiftStatus.SUCCESS
+            else -> TileStatus.SUCCESS
         }
     }
 
@@ -106,13 +128,13 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     }
 
     fun prepareForShift(){
-        this.shiftStatus = ShiftStatus.WAITING
+        this.tileStatus = TileStatus.WAITING
     }
     fun isWaitingForShift():Boolean{
-        return shiftStatus == ShiftStatus.WAITING
+        return tileStatus == TileStatus.WAITING
     }
 
-    fun shift(direction: Direction): ShiftStatus {
+    fun shift(direction: Direction): TileStatus {
 
         val shiftPoint: Vec2Int = when(direction){
             Direction.DOWN -> Vec2Int(x = 1, y = 0)
@@ -120,12 +142,18 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             Direction.LEFT -> Vec2Int(x = 0, y = -1)
             else -> Vec2Int(x = 0, y = 0)
         }
-        shiftStatus = shift(direction, shiftPoint)
-        return shiftStatus
+        tileStatus = shift(direction, shiftPoint)
+        return tileStatus
     }
 
-    fun rotate(rotationIndex: Int) {
-        potentialPoint = Vec2Int(0,0) * parent.getPivotTile().getPoint()
+    fun rotate(rotation:RotationMatrix):TileStatus {
+        println("REL POS: ${getRelativePosition()}")
+        potentialPoint = (this.getPoint() + (rotation * getRelativePosition())) + this.getRelativePosition()
+        return getTranslationStatus(Direction.ROTATION)
+    }
+
+    fun getRelativePosition():Vec2Int{
+        return (parent.getPivotTile().getPoint() - this.getPoint())
     }
 
     fun getIsPivot(): Boolean {

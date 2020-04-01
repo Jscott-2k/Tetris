@@ -6,24 +6,33 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="- Improvements to row clearing and shifting algorithm&#10;- Commands do not work/frame does not advance when user enters command that does not exist&#10;- Tetromino has two new properties. lockedInPlace and isPreservedForm. &#10;- Tiles have own isGrounded property&#10;- Many new ShiftStatus constants added&#10;- Tile collision refactored">
+    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/RotationMatrix.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$alignTilesAfterRowRemoval$$inlined$compareBy$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$alignTilesAfterRowRemoval$$inlined$compareBy$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$removeEmptyTetrominos$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$removeEmptyTetrominos$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$4.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager$start$6.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoArrangement.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoArrangement.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoTile.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoTile.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/ShiftStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/ShiftStatus.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/Direction.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/Direction.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/ShiftStatus.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/enums/TileStatus.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameManager.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoTile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoTile.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/Matrix2x2Int.kt" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -209,7 +218,14 @@
       <option name="project" value="LOCAL" />
       <updated>1585689963232</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="- Improvements to row clearing and shifting algorithm&#10;- Commands do not work/frame does not advance when user enters command that does not exist&#10;- Tetromino has two new properties. lockedInPlace and isPreservedForm. &#10;- Tiles have own isGrounded property&#10;- Many new ShiftStatus constants added&#10;- Tile collision refactored">
+      <created>1585721942282</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1585721942282</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -241,10 +257,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="449" y="142" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585665095403" />
-    <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585669953514">
+    <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog" timestamp="1585774802936">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585669953514" />
+    <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585774802936" />
     <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486525856" />
     <state x="533" y="0" width="473" height="824" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1585666201048">
       <screen x="0" y="0" width="1536" height="824" />
@@ -271,22 +287,22 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="322" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1585519451451" />
-    <state width="1495" height="386" key="GridCell.Tab.0.bottom" timestamp="1585721261246">
+    <state width="1495" height="582" key="GridCell.Tab.0.bottom" timestamp="1585782594196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="386" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721261246" />
-    <state width="1495" height="386" key="GridCell.Tab.0.center" timestamp="1585721261245">
+    <state width="1495" height="582" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
+    <state width="1495" height="582" key="GridCell.Tab.0.center" timestamp="1585782594196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="386" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721261245" />
-    <state width="1495" height="386" key="GridCell.Tab.0.left" timestamp="1585721261245">
+    <state width="1495" height="582" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
+    <state width="1495" height="582" key="GridCell.Tab.0.left" timestamp="1585782594196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="386" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721261245" />
-    <state width="1495" height="386" key="GridCell.Tab.0.right" timestamp="1585721261246">
+    <state width="1495" height="582" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
+    <state width="1495" height="582" key="GridCell.Tab.0.right" timestamp="1585782594196">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="386" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721261246" />
+    <state width="1495" height="582" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
     <state width="1495" height="75" key="GridCell.Tab.1.bottom" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -311,10 +327,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1585454349786" />
-    <state x="409" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585664939525">
+    <state x="409" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585772675106">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585664939525" />
+    <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585772675106" />
     <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486589084" />
     <state x="553" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585667566289">
       <screen x="0" y="0" width="1536" height="824" />
@@ -324,9 +340,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="94" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1585439219793" />
-    <state x="510" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1585486962066">
+    <state x="510" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1585747551380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="510" y="52" key="refactoring.ChangeSignatureDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585747551380" />
     <state x="510" y="52" key="refactoring.ChangeSignatureDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486962066" />
     <state x="425" y="187" key="run.anything.popup" timestamp="1585718131452">
       <screen x="0" y="0" width="1536" height="824" />

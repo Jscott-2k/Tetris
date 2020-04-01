@@ -10,13 +10,12 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
     private val rowDeathRange:IntRange = 0 until 3
     private val colDeathRange:IntRange = 0 until cols
-    private val tetrominos: ArrayList<Tetromino> = ArrayList()
+    private val tetrominoes: ArrayList<Tetromino> = ArrayList()
     private val display: Array<Array<Char>> = Array(rows){Array(cols){' '}}
     private val colDisplayRange: IntRange = 0 until cols
     private val rowDisplayRange: IntRange = 2 until rows //First two rows hidden
     private val spawnPoint: Vec2Int = Vec2Int(x = 1, y = 4)
     private val gravityDirection: Direction = Direction.DOWN
-
 
     fun getGravityDirection():Direction{
         return gravityDirection
@@ -29,7 +28,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     }
     fun addTetromino(tetromino: Tetromino):Boolean {
         if(tetromino.getCanSpawn()){
-            tetrominos.add(tetromino)
+            tetrominoes.add(tetromino)
             return true
         }
         return false
@@ -48,7 +47,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     fun update(){
 
         //Update for each tetromino before display., i.e, test grounded, apply gravity...
-        tetrominos.forEach{
+        tetrominoes.forEach{
             it.update()
         }
 
@@ -63,7 +62,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
     private fun updateDisplay(){
         //Update display for each tetromino
-        tetrominos.forEach {
+        tetrominoes.forEach {
             updateDisplayMapForTetromino(it)
         }
     }
@@ -83,7 +82,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         return display[point.x][point.y]
     }
     fun getTileAtPoint(point: Vec2Int): TetrominoTile?{
-        tetrominos.forEach {
+        tetrominoes.forEach {
             val currentTetromino: Tetromino = it
             val tile: TetrominoTile? = currentTetromino.findTileAt(point)
             if(tile!=null){
@@ -143,7 +142,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     }
 
     fun shove() {
-        tetrominos.forEach {
+        tetrominoes.forEach {
             while(!it.getIsGrounded()){
                 if(it.getIsPreservedForm()){
                    it.shift(Direction.DOWN)
@@ -171,7 +170,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     }
 
     private fun removeEmptyTetrominos(){
-        tetrominos.removeIf{
+        tetrominoes.removeIf{
             val shouldRemove = (it.getTilesLeft() == 0)
             if(shouldRemove){
                 println("REMOVING TETROMINO $it: 0 TILES LEFT!")
@@ -184,7 +183,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
         println("\tFINDING TILES ABOVE ROW $rowRemoved TO BE REALIGNED...")
         val tilesAtOrAboveRow:MutableList<TetrominoTile> = mutableListOf()
-        tetrominos.forEach {
+        tetrominoes.forEach {
             //Retrieve all tiles above the removed row
             val additionalTilesAtOrAboveRow:MutableList<TetrominoTile> = it.getTilesAtOrAboveRow(rowRemoved)
             tilesAtOrAboveRow.addAll(additionalTilesAtOrAboveRow)
@@ -201,17 +200,17 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             }
         }
         println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
-        tilesAtOrAboveRow
-            .sortedWith(compareBy{it.getPoint().x}) //Tiles have to be sorted so that tiles further below get shifted first
-            .reversed()
-            .sortedWith(compareBy{it.parent.getIsPreservedForm()})
-            .forEach{ //Each tile needs to try and shift downwards. If it is unpreserved the whole parent will be shifted downwards
+        tilesAtOrAboveRow  //Tiles have to be first be sorted so that tiles further below get shifted first
+            .sortedWith(compareByDescending<TetrominoTile>{it.getPoint().x}.thenByDescending{it.parent.getIsPreservedForm()})
+            .forEachIndexed{ i: Int, it: TetrominoTile ->
+                //Each tile needs to try and shift downwards. If it is unpreserved the whole parent will be shifted downwards
                 if(!it.parent.getIsPreservedForm()){
                     it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
                 }else{
                     it.parent.shift(Direction.DOWN) //Shift entire tetromino downwards when is preserved
                     it.parent.setLockedInPlace(true) //Do not shift this tetromino any more in this for each. Only needs to be shifted once
                 }
+                println("\tTILE REALIGNED: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
             }
         tilesAtOrAboveRow.forEach {
             it.parent.setLockedInPlace(false) //Unlock tetromino's previouslylocked in place by re-alignment
@@ -223,7 +222,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         for(col:Int in colDisplayRange){
             val point = Vec2Int(row, col)
             //Remove all tiles in that col
-            tetrominos.forEach {
+            tetrominoes.forEach {
                 it.removeTileAt(point).also{tile ->
                  if(tile!=null){
                      println("\tTILE $tile REMOVED!")
@@ -259,6 +258,6 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     }
 
     fun getHasTetrominos(): Boolean {
-        return (tetrominos.size != 0)
+        return (tetrominoes.size != 0)
     }
 }

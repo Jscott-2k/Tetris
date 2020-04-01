@@ -1,8 +1,10 @@
 package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
-import blogger.jscott2k.tetris.enums.ShiftStatus
+import blogger.jscott2k.tetris.enums.TileStatus
 import blogger.jscott2k.tetris.game.GameGrid
+import blogger.jscott2k.tetris.game.GameManager
+import blogger.jscott2k.tetris.utils.RotationMatrix
 import blogger.jscott2k.tetris.utils.Vec2Int
 
 
@@ -15,6 +17,7 @@ class Tetromino(private val grid: GameGrid){
     private val tiles: MutableList<TetrominoTile> = MutableList(size = 4){initTile(it)}
     private var isPreservedForm:Boolean = true
     private var lockedInPlace:Boolean = false
+
 
     private fun initTile(index:Int):TetrominoTile{
         val tile = TetrominoTile(parent = this, grid = grid)
@@ -56,21 +59,42 @@ class Tetromino(private val grid: GameGrid){
         return canSpawn
     }
 
-    fun rotate(a:Int){
-        rotationIndex - (rotationIndex + a) % 4
+    fun rotate(a:Int):MutableMap<TetrominoTile, TileStatus>{
+
+        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
+
+        val rotation:RotationMatrix =
+            if(a<0){
+                RotationMatrix.COUNTER_CLOCKWISE
+            }else{
+                RotationMatrix.CLOCKWISE
+            }
+
+        val tileStatuses:MutableMap<TetrominoTile, TileStatus> = mutableMapOf()
+
         tiles.forEach{
-            it.rotate(rotationIndex)
+            tileStatuses[it] = it.rotate(rotation)
         }
+
+        val canUpdate:Boolean = tileStatuses.values.none { it != TileStatus.SUCCESS }
+
+        if(canUpdate){
+            tileStatuses.keys.forEach{
+                it.updateToPotentialPoint()
+            }
+        }
+
+        return tileStatuses
     }
 
     private fun setTilePointFromScheme(index:Int, tile: TetrominoTile):Boolean {
         tile.setIsPivot(scheme.getGridPoint(index) == scheme.getPivotPoint())
         val spawnPoint: Vec2Int = ((scheme.getGridPoint(index)) + grid.getSpawnPoint()) - scheme.getPivotPoint()
         tile.setPoint(point = spawnPoint)
-        return validSpawnpoint(point = spawnPoint)
+        return validSpawnPoint(point = spawnPoint)
     }
 
-    private fun validSpawnpoint(point: Vec2Int): Boolean {
+    private fun validSpawnPoint(point: Vec2Int): Boolean {
         return (point.x >= 0 && point.y >= 0) && (point.x < grid.getRows() && point.y < grid.getCols())
     }
 
@@ -111,50 +135,45 @@ class Tetromino(private val grid: GameGrid){
         return isPreservedForm
     }
 
-    fun shift(direction: Direction, specificTile:TetrominoTile):ShiftStatus{
+    fun shift(direction: Direction, specificTile:TetrominoTile):TileStatus{
 
-        if(lockedInPlace){ return ShiftStatus.LOCKED }
-        if(isPreservedForm){return ShiftStatus.FAILED_WRONG_PRESERVATION}
+        if(lockedInPlace){ return TileStatus.LOCKED }
+        if(isPreservedForm){return TileStatus.FAILED_WRONG_PRESERVATION}
 
         println("\t$this: SHIFTING DIRECTION: $direction")
 
-        val tileToShift: TetrominoTile = specificTile.takeIf { it in this.tiles } ?: return ShiftStatus.FAILED_NULL_TILE
-        val shiftStatus:ShiftStatus = tileToShift.shift(direction)
+        val tileToShift: TetrominoTile = specificTile.takeIf { it in this.tiles } ?: return TileStatus.FAILED_NULL_TILE
+        val tileStatus:TileStatus = tileToShift.shift(direction)
 
-        if(shiftStatus == ShiftStatus.SUCCESS){
+        if(tileStatus == TileStatus.SUCCESS){
             tileToShift.updateToPotentialPoint()
         }
-        println("\tSTATUS: $shiftStatus")
-        return shiftStatus
+        println("\tSTATUS: $tileStatus")
+        return tileStatus
     }
 
-    fun shift(direction: Direction):ArrayList<ShiftStatus>{
+    fun shift(direction: Direction):MutableMap<TetrominoTile, TileStatus>{
 
-        if(lockedInPlace){ return arrayListOf(ShiftStatus.LOCKED) }
-        if(!isPreservedForm){return arrayListOf(ShiftStatus.FAILED_WRONG_PRESERVATION)}
+        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED) }
+        if(!isPreservedForm){return mutableMapOf(GameManager.getDefaultTile()  to TileStatus.FAILED_WRONG_PRESERVATION)}
 
-        val shiftStatus:ArrayList<ShiftStatus> = arrayListOf()
+        val tileStatuses:MutableMap<TetrominoTile, TileStatus> = mutableMapOf()
 
         println("\t$this: SHIFTING DIRECTION: $direction")
 
         tiles.forEach {
-            shiftStatus.add(it.shift(direction))
+            tileStatuses[it] = it.shift(direction)
         }
 
-        tiles.forEach {
-            var canUpdatePosition = true
-            for (status: ShiftStatus in shiftStatus){
-                if(status != ShiftStatus.SUCCESS){
-                    canUpdatePosition = false
-                    break
-                }
-            }
-            if(canUpdatePosition){
+        val canUpdatePosition:Boolean = tileStatuses.values.none { it != TileStatus.SUCCESS }
+
+        if(canUpdatePosition){
+            tileStatuses.keys.forEach {
                 it.updateToPotentialPoint()
             }
         }
-        println("\tSTATUS: $shiftStatus")
-        return shiftStatus
+        println("\tSTATUS: $tileStatuses")
+        return tileStatuses
     }
 
     fun findTileAt(point: Vec2Int): TetrominoTile?{

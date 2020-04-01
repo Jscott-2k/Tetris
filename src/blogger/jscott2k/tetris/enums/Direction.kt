@@ -5,4 +5,5 @@ enum class Direction {
     DOWN,
     LEFT,
     RIGHT,
+    ROTATION
 }
