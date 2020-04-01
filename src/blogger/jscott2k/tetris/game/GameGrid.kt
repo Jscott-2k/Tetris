@@ -40,7 +40,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 //        }
 //    }
 
-    fun requestPlayerSpawn():Boolean{
+    private fun requestPlayerSpawn():Boolean{
         return GameManager.createPlayerTetromino()
     }
 

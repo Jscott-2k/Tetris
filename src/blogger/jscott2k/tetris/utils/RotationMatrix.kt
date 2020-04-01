@@ -1,7 +1,5 @@
 package blogger.jscott2k.tetris.utils
 
-
-
 data class RotationMatrix(val matrix:Array<Array<Int>>){
 
     companion object{
@@ -29,5 +27,4 @@ data class RotationMatrix(val matrix:Array<Array<Int>>){
     override fun hashCode(): Int {
         return matrix.contentDeepHashCode()
     }
-
 }
