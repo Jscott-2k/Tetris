@@ -234,7 +234,8 @@
     <MESSAGE value=" - Reworked input manager and exception handling&#10; - Changed GameManager nextFrame() to allow multiple inputs on certain exceptions or accidental inputs&#10; - Added return for input manager actions" />
     <MESSAGE value="- Rows are now cleared when all columns are filled with tiles&#10;- Tiles above cleared row are shifted downwards until they are grounded&#10;Only tested with I's and O's" />
     <MESSAGE value="- Improvements to row clearing and shifting algorithm&#10;- Commands do not work/frame does not advance when user enters command that does not exist&#10;- Tetromino has two new properties. lockedInPlace and isPreservedForm. &#10;- Tiles have own isGrounded property&#10;- Many new ShiftStatus constants added&#10;- Tile collision refactored" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Improvements to row clearing and shifting algorithm&#10;- Commands do not work/frame does not advance when user enters command that does not exist&#10;- Tetromino has two new properties. lockedInPlace and isPreservedForm. &#10;- Tiles have own isGrounded property&#10;- Many new ShiftStatus constants added&#10;- Tile collision refactored" />
+    <MESSAGE value="- Preliminary RotationMatrix, with rotation. No options. Rotation command&#10;- Fixed alignment bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Preliminary RotationMatrix, with rotation. No options. Rotation command&#10;- Fixed alignment bug" />
   </component>
   <component name="WindowStateProjectService">
     <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585454293471">
@@ -271,10 +272,10 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="248" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585669412916" />
-    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2" timestamp="1585721940302">
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2" timestamp="1585783185862">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721940302" />
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585783185862" />
     <state x="2252" y="175" key="DiffContextDialog" timestamp="1585721836510">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
