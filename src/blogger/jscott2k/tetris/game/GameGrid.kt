@@ -17,6 +17,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     private val spawnPoint: Vec2Int = Vec2Int(x = 1, y = 4)
     private val gravityDirection: Direction = Direction.DOWN
 
+
     fun getGravityDirection():Direction{
         return gravityDirection
     }
@@ -51,14 +52,13 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             it.update()
         }
 
-        //Remove filled rows
-        removeFilledRows()
-
         //attempt to spawn player tetromino. Must be before update!
-        requestPlayerSpawn()
+        if(requestPlayerSpawn()){
 
-        //Updates display
-        updateDisplay()
+            //Remove filled rows when next player spawned
+            removeFilledRows()
+        }
+
     }
 
     private fun updateDisplay(){
@@ -98,7 +98,8 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         return getTileAtPoint(point)
     }
 
-    fun display() {
+    private fun printDisplay(){
+
         println()
         for(i:Int in 0..(rows.toString().length + (cols*2) + 4)){
             print("=")
@@ -124,6 +125,15 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         }
         println()
     }
+
+    fun display() {
+
+        //Updates display
+        updateDisplay()
+
+        //Print display out
+        printDisplay()
+    }
     fun clear() {
         for (row: Int in rowDisplayRange) {
             for (col: Int in colDisplayRange) {
@@ -135,7 +145,11 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     fun shove() {
         tetrominos.forEach {
             while(!it.getIsGrounded()){
-                it.shift(Direction.DOWN)
+                if(it.getIsPreservedForm()){
+                   it.shift(Direction.DOWN)
+                }else{
+                    it.shiftAllNotPreserved(Direction.DOWN)
+                }
             }
         }
     }
@@ -155,12 +169,59 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         }
         return true
     }
-    private fun removeFilledRow(row:Int){
-        println()
-        println("REMOVING ROW: $row")
+
+    private fun removeEmptyTetrominos(){
+        tetrominos.removeIf{
+            val shouldRemove = (it.getTilesLeft() == 0)
+            if(shouldRemove){
+                println("REMOVING TETROMINO $it: 0 TILES LEFT!")
+            }
+            shouldRemove
+        }
+    }
+
+    private fun alignTilesAfterRowRemoval(rowRemoved:Int){
+
+        println("\tFINDING TILES ABOVE ROW $rowRemoved TO BE REALIGNED...")
+        val tilesAtOrAboveRow:MutableList<TetrominoTile> = mutableListOf()
+        tetrominos.forEach {
+            //Retrieve all tiles above the removed row
+            val additionalTilesAtOrAboveRow:MutableList<TetrominoTile> = it.getTilesAtOrAboveRow(rowRemoved)
+            tilesAtOrAboveRow.addAll(additionalTilesAtOrAboveRow)
+
+            //Only can be shiftable when at least one of the the tile are above the row
+            if(additionalTilesAtOrAboveRow.size>0){
+
+                println("\t\tFOUND: $additionalTilesAtOrAboveRow")
+
+                it.setIsGrounded(false)
+
+                //If the tetromino is missing a tile it should have NOT have a preserved form
+                it.setIsPreservedForm(it.getTilesLeft() == 4)
+            }
+        }
+        println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
+        tilesAtOrAboveRow
+            .sortedWith(compareBy{it.getPoint().x}) //Tiles have to be sorted so that tiles further below get shifted first
+            .reversed()
+            .sortedWith(compareBy{it.parent.getIsPreservedForm()})
+            .forEach{ //Each tile needs to try and shift downwards. If it is unpreserved the whole parent will be shifted downwards
+                if(!it.parent.getIsPreservedForm()){
+                    it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
+                }else{
+                    it.parent.shift(Direction.DOWN) //Shift entire tetromino downwards when is preserved
+                    it.parent.setLockedInPlace(true) //Do not shift this tetromino any more in this for each. Only needs to be shifted once
+                }
+            }
+        tilesAtOrAboveRow.forEach {
+            it.parent.setLockedInPlace(false) //Unlock tetromino's previouslylocked in place by re-alignment
+        }
+    }
+
+    private fun removeTilesFromRow(row:Int){
+        println("\nREMOVING ROW: $row")
         for(col:Int in colDisplayRange){
             val point = Vec2Int(row, col)
-
             //Remove all tiles in that col
             tetrominos.forEach {
                 it.removeTileAt(point).also{tile ->
@@ -169,36 +230,28 @@ class GameGrid(private val rows: Int, private val cols: Int) {
                  }
                 }
             }
-            println("\tTILES REMOVED!")
-
-            //Remove tetrominos with 0 tiles left
-            tetrominos.removeIf{
-                val shouldRemove = it.getTilesLeft() == 0
-                if(shouldRemove){
-                    println("REMOVING TETROMINO $it: 0 TILES LEFT!")
-                }
-                shouldRemove
-            }
-
-            //Attempt to shift all tiles ABOVE the removed row DOWN
-            tetrominos.forEach {
-                val tilesAtOrAboveRow = it.getTilesAtOrAboveRow(row)
-                if(tilesAtOrAboveRow.size>0){
-                    println("\tSHIFTING TILES IN TETROMINO $it ABOVE ROW $row DOWN")
-                    it.setIsGrounded(false)
-                    while(!it.getIsGrounded()){
-                        it.shift(gravityDirection)
-                    }
-                }
-            }
         }
     }
     private fun removeFilledRows(){
-        for(row:Int in rowDisplayRange){
+
+        val removedRows:ArrayList<Int> = arrayListOf()
+
+        for(row:Int in rowDisplayRange.reversed()){
             if(isRowFilled(row)){
-                removeFilledRow(row)
+
+                //Remove tiles in the row
+                removeTilesFromRow(row)
+
+                //Remove tetrominos with 0 tiles left
+                removeEmptyTetrominos()
+
+                //Track rows removed
+                removedRows.add(row)
             }
         }
+
+        //Attempt to shift all tiles ABOVE the removed row DOWN
+        removedRows.forEach {alignTilesAfterRowRemoval(it)}
     }
 
     fun getSpawnPoint(): Vec2Int {

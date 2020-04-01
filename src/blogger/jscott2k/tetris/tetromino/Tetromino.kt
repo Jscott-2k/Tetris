@@ -13,6 +13,8 @@ class Tetromino(private val grid: GameGrid){
     private var isGrounded:Boolean = false
     private var canSpawn:Boolean = true
     private val tiles: MutableList<TetrominoTile> = MutableList(size = 4){initTile(it)}
+    private var isPreservedForm:Boolean = true
+    private var lockedInPlace:Boolean = false
 
     private fun initTile(index:Int):TetrominoTile{
         val tile = TetrominoTile(parent = this, grid = grid)
@@ -87,44 +89,58 @@ class Tetromino(private val grid: GameGrid){
     }
 
     fun getIsGrounded():Boolean{
-        return this.isGrounded
+        return if(isPreservedForm)
+             this.isGrounded
+        else{
+            //Finds a tile that is NOT grounded. If no tile was found then return true, otherwise return false
+            tiles.find { !it.getIsGrounded() } == null
+        }
     }
 
     fun update(){
         tiles.forEach {
             //Set this tetromino as grounded if any tile is at last row spot
             if(it.getPoint().x == grid.getRows()-1){
-                setIsGrounded(true)
+                this.setIsGrounded(true)
             }
         }
         shift(grid.getGravityDirection()) //Apply gravity
     }
 
-//    private fun getLeftMostPieces(): ArrayList<TetrominoPiece> {
-//
-//    }
-//
-//    private fun getRightMostPieces(): ArrayList<TetrominoPiece> {
-//
-//    }
-//
-//    private fun getBottomMostPieces(): ArrayList<TetrominoPiece> {
-//
-//    }
+    fun getIsPreservedForm():Boolean{
+        return isPreservedForm
+    }
 
-//    fun shiftWithNoCollision(shiftPoint: GridPoint) {
-//        pieces.forEach {
-//            it.shift(shiftPoint)
-//        }
-//    }
+    fun shift(direction: Direction, specificTile:TetrominoTile):ShiftStatus{
+
+        if(lockedInPlace){ return ShiftStatus.LOCKED }
+        if(isPreservedForm){return ShiftStatus.FAILED_WRONG_PRESERVATION}
+
+        println("\t$this: SHIFTING DIRECTION: $direction")
+
+        val tileToShift: TetrominoTile = specificTile.takeIf { it in this.tiles } ?: return ShiftStatus.FAILED_NULL_TILE
+        val shiftStatus:ShiftStatus = tileToShift.shift(direction)
+
+        if(shiftStatus == ShiftStatus.SUCCESS){
+            tileToShift.updateToPotentialPoint()
+        }
+        println("\tSTATUS: $shiftStatus")
+        return shiftStatus
+    }
 
     fun shift(direction: Direction):ArrayList<ShiftStatus>{
-        println("$this: SHIFTING DIRECTION: $direction")
 
-        val shiftStatus:ArrayList<ShiftStatus> = ArrayList()
+        if(lockedInPlace){ return arrayListOf(ShiftStatus.LOCKED) }
+        if(!isPreservedForm){return arrayListOf(ShiftStatus.FAILED_WRONG_PRESERVATION)}
+
+        val shiftStatus:ArrayList<ShiftStatus> = arrayListOf()
+
+        println("\t$this: SHIFTING DIRECTION: $direction")
+
         tiles.forEach {
             shiftStatus.add(it.shift(direction))
         }
+
         tiles.forEach {
             var canUpdatePosition = true
             for (status: ShiftStatus in shiftStatus){
@@ -167,5 +183,19 @@ class Tetromino(private val grid: GameGrid){
         val tile: TetrominoTile = tiles.find {it.getPoint() == point} ?: return null
         tiles.remove(tile)
         return tile
+    }
+
+    fun setIsPreservedForm(isPreservedForm: Boolean) {
+        this.isPreservedForm = isPreservedForm
+    }
+
+    fun setLockedInPlace(lockedInPlace:Boolean) {
+        this.lockedInPlace = lockedInPlace
+    }
+
+    fun shiftAllNotPreserved(direction: Direction) {
+        tiles.forEach {
+            this.shift(direction = direction, specificTile = it)
+        }
     }
 }

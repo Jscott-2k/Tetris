@@ -22,11 +22,8 @@ class Player{
 
     fun getIsGrounded():Boolean{
         return if(tetromino!=null){
-
             tetromino!!.getIsGrounded()
-
         } else{
-
             false
         }
     }

@@ -53,6 +53,7 @@ object GameManager {
                 TetrominoScheme.setAllowedSchemes(onlySchemes)
             return@addInputAction true
         }
+        InputManager.addInputAction(key = "next") {false}
 
         //Clear grid
         grid.clear()
@@ -109,8 +110,11 @@ object GameManager {
 
     private fun input(): Boolean {
         print(">> ")
-        val input: String = readLine() ?: ""
-        return InputManager.invoke(input)
+        var input: String = readLine() ?: "next"
+        if(input == ""){
+            input = "next"
+        }
+        return InputManager.invoke(input )
     }
 
     /**
@@ -127,7 +131,7 @@ object GameManager {
      * The game is played frame by frame. At end of each frame, user has opportunity to send command.
      * Each frame has 4 processes. Clear, Update, Display, and User Input
      */
-    fun nextFrame() {
+    private fun nextFrame() {
         if(!allowAdditionalInput){
             grid.clear()
             grid.update()
