@@ -1,5 +1,6 @@
 package blogger.jscott2k.tetris.tetromino
 
+import blogger.jscott2k.tetris.tetromino.TetrominoArrangement
 import blogger.jscott2k.tetris.utils.Vec2Int
 
 const val P: Boolean = true
@@ -15,16 +16,16 @@ enum class TetrominoScheme(
             configure =
             arrayOf(
                 booleanArrayOf(
-                    P, X, X, X
+                    P, P, P, P
                 ), booleanArrayOf(
-                    P, X, X, X
+                    X, X, X, X
                 ), booleanArrayOf(
-                    P, X, X, X
+                    X, X, X, X
                 ), booleanArrayOf(
-                    P, X, X, X
+                    X, X, X, X
                 )
             )
-        ), charIdentifier = 'I', pivotPoint = Vec2Int(1, 0)
+        ), charIdentifier = 'I', pivotPoint = Vec2Int(0, 1)
     ),
     O(
         TetrominoArrangement(
@@ -105,7 +106,7 @@ enum class TetrominoScheme(
                     P, X, X, X
                 ), booleanArrayOf(
                     P, P, P, P
-                ),  booleanArrayOf(
+                ), booleanArrayOf(
                     X, X, X, X
                 ), booleanArrayOf(
                     X, X, X, X
@@ -113,7 +114,6 @@ enum class TetrominoScheme(
             )
         ),
         charIdentifier = 'J', pivotPoint = Vec2Int(1, 2)
-
     ),
     L(
         TetrominoArrangement(
@@ -144,7 +144,7 @@ enum class TetrominoScheme(
             println("SETTING ALLOWED TETROMINOS: $allowedSchemes")
             Companion.allowedSchemes = allowedSchemes.toMutableList()
         }
-        fun removeAllowedScheme(scheme:TetrominoScheme){
+        fun removeAllowedScheme(scheme: TetrominoScheme){
             allowedSchemes.remove(scheme)
         }
         fun getAllowedSchemes():List<TetrominoScheme>{

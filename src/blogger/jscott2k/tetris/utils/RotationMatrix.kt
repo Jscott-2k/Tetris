@@ -3,8 +3,16 @@ package blogger.jscott2k.tetris.utils
 data class RotationMatrix(val matrix:Array<Array<Int>>){
 
     companion object{
-        val CLOCKWISE:RotationMatrix = RotationMatrix(arrayOf(arrayOf(0,1), arrayOf(-1, 0)))
-        val COUNTER_CLOCKWISE:RotationMatrix = RotationMatrix(arrayOf(arrayOf(0,-1), arrayOf(1, 0)))
+        val CLOCKWISE:RotationMatrix = RotationMatrix(
+            arrayOf(
+                arrayOf(0,1),
+                arrayOf(-1, 0)
+            ))
+        val COUNTER_CLOCKWISE:RotationMatrix = RotationMatrix(
+            arrayOf(
+                arrayOf(0,-1),
+                arrayOf(1, 0))
+            )
     }
 
     operator fun times(other:Vec2Int):Vec2Int{

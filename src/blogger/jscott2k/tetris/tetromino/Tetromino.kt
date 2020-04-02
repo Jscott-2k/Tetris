@@ -1,6 +1,7 @@
 package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
+import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 import blogger.jscott2k.tetris.enums.TileStatus
 import blogger.jscott2k.tetris.game.GameGrid
 import blogger.jscott2k.tetris.game.GameManager
