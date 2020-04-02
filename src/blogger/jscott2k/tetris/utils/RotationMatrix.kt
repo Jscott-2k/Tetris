@@ -17,8 +17,8 @@ data class RotationMatrix(val matrix:Array<Array<Int>>){
 
     operator fun times(other:Vec2Int):Vec2Int{
         return Vec2Int(
-            x = (matrix[0][0] * other.x) + (matrix[0][1] * other.y),
-            y = (matrix[1][0] * other.x) + (matrix[1][1] * other.y))
+            x = (matrix[0][0] * other.x) + (matrix[1][0] * other.y),
+            y = (matrix[0][1] * other.x) + (matrix[1][1] * other.y))
     }
 
     override fun equals(other: Any?): Boolean {

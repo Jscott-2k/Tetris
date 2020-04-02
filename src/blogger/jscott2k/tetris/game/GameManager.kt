@@ -61,7 +61,13 @@ object GameManager {
                 TetrominoScheme.setAllowedSchemes(onlySchemes)
             return@addInputAction true
         }
-        InputManager.addInputAction(key = "next") {false}
+        InputManager.addInputAction(key = "next") {
+            false
+        }
+        InputManager.addInputAction(key = "gravity"){
+            grid.toggleGravity()
+            true
+        }
 
         //Clear grid
         grid.clear()

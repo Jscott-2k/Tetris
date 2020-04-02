@@ -16,6 +16,16 @@ class GameGrid(private val rows: Int, private val cols: Int) {
     private val rowDisplayRange: IntRange = 2 until rows //First two rows hidden
     private val spawnPoint: Vec2Int = Vec2Int(x = 1, y = 4)
     private val gravityDirection: Direction = Direction.DOWN
+    private var gravityEnabled:Boolean = true
+
+    fun toggleGravity(){
+        gravityEnabled = !gravityEnabled
+        println("TOGGLED GRAVITY: gravityEnabled=$gravityEnabled")
+    }
+
+    fun getGravityEnabled():Boolean{
+        return gravityEnabled;
+    }
 
     fun getGravityDirection():Direction{
         return gravityDirection

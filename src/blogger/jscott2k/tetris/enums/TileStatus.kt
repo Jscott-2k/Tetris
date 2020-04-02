@@ -12,4 +12,5 @@ enum class TileStatus{
     FAILED_WRONG_PRESERVATION,
     FAILED_NULL_TILE,
     LOCKED,
+    NO_ROTATION
 }

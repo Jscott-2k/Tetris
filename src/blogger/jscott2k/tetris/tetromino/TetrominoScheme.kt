@@ -9,7 +9,8 @@ const val X: Boolean = false
 enum class TetrominoScheme(
     private val arrangement: TetrominoArrangement,
     private val charIdentifier: Char,
-    private val pivotPoint: Vec2Int
+    private val pivotPoint: Vec2Int,
+    private val maxRotationIndex:Int = 3
 ) {
     I(
         TetrominoArrangement(
@@ -25,7 +26,7 @@ enum class TetrominoScheme(
                     X, X, X, X
                 )
             )
-        ), charIdentifier = 'I', pivotPoint = Vec2Int(0, 1)
+        ), charIdentifier = 'I', pivotPoint = Vec2Int(0, 1), maxRotationIndex = 2
     ),
     O(
         TetrominoArrangement(
@@ -42,7 +43,7 @@ enum class TetrominoScheme(
                 )
             )
         ),
-        charIdentifier = 'O', pivotPoint = Vec2Int(1, 0)
+        charIdentifier = 'O', pivotPoint = Vec2Int(1, 0), maxRotationIndex = 1
     ),
     T(
         TetrominoArrangement(
@@ -166,5 +167,7 @@ enum class TetrominoScheme(
     fun getPivotPoint(): Vec2Int {
         return pivotPoint
     }
-
+    fun getMaxRotationIndex():Int{
+        return maxRotationIndex
+    }
 }

@@ -37,10 +37,14 @@ class Player{
     }
 
     fun rotate(rotationDirection: String, amount:String) {
+
+        println("$this: ROTATING")
+
         if(rotationDirection.toUpperCase() == "LEFT")
-            tetromino?.rotate(-(amount.toInt().absoluteValue))
+            println("\tSTATUS: ${tetromino?.rotate(-(amount.toInt().absoluteValue))}")
+
         else{
-            tetromino?.rotate(amount.toInt().absoluteValue)
+            println("\tSTATUS: ${tetromino?.rotate(amount.toInt().absoluteValue)}")
         }
     }
 }

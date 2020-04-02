@@ -1,7 +1,6 @@
 package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
-import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 import blogger.jscott2k.tetris.enums.TileStatus
 import blogger.jscott2k.tetris.game.GameGrid
 import blogger.jscott2k.tetris.game.GameManager
@@ -13,12 +12,13 @@ class Tetromino(private val grid: GameGrid){
 
     private val scheme: TetrominoScheme = TetrominoScheme.getRandom()
     private var rotationIndex:Int = 0
+    private val possibleRotations:Int = scheme.getMaxRotationIndex()
     private var isGrounded:Boolean = false
     private var canSpawn:Boolean = true
     private val tiles: MutableList<TetrominoTile> = MutableList(size = 4){initTile(it)}
     private var isPreservedForm:Boolean = true
     private var lockedInPlace:Boolean = false
-
+    private var previousRotationMatrix:RotationMatrix? = null
 
     private fun initTile(index:Int):TetrominoTile{
         val tile = TetrominoTile(parent = this, grid = grid)
@@ -47,6 +47,9 @@ class Tetromino(private val grid: GameGrid){
     }
 
     init{
+
+
+
         println("Created new Tetromino")
         println("\tScheme: ${scheme.name}")
         print("\tPoints:")
@@ -61,29 +64,60 @@ class Tetromino(private val grid: GameGrid){
         return canSpawn
     }
 
-    fun rotate(a:Int):MutableMap<TetrominoTile, TileStatus>{
+    private fun calculateRotationIndex(dr:Int):Int{
 
-        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
+        if(dr == 0 ){return rotationIndex}
 
-        val rotation:RotationMatrix =
-            if(a<0){
+        return ((dr+rotationIndex) % possibleRotations + possibleRotations) % possibleRotations
+    }
+
+    fun getRotationMatrix(dr:Int):RotationMatrix{
+
+        var rotationMatrix:RotationMatrix = if(dr<0){
                 RotationMatrix.COUNTER_CLOCKWISE
             }else{
                 RotationMatrix.CLOCKWISE
             }
+        rotationMatrix = when(scheme){
+            TetrominoScheme.I -> {
+                when(previousRotationMatrix) {
+                    RotationMatrix.CLOCKWISE ->  RotationMatrix.COUNTER_CLOCKWISE
+                    else -> RotationMatrix.CLOCKWISE
+                }
+            }
+            else -> rotationMatrix
+        }
+
+        return rotationMatrix
+    }
+
+    fun rotate(dr:Int):MutableMap<TetrominoTile, TileStatus>{
+
+        rotationIndex = calculateRotationIndex(dr)
+
+        if(possibleRotations <= 1 ){
+            return mutableMapOf(GameManager.getDefaultTile() to TileStatus.NO_ROTATION)
+        }
+
+        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
+
+        val rotationMatrix:RotationMatrix = getRotationMatrix(dr)
 
         val tileStatuses:MutableMap<TetrominoTile, TileStatus> = mutableMapOf()
 
         tiles.forEach{
-            tileStatuses[it] = it.rotate(rotation)
+                tileStatuses[it] = it.rotate(rotationMatrix)
         }
 
         val canUpdate:Boolean = tileStatuses.values.none { it != TileStatus.SUCCESS }
 
         if(canUpdate){
-            tileStatuses.keys.forEach{
+            println("\t$this: NEW ROTATION INDEX: $rotationIndex USING DR: $dr")
+            println("\tPOSSIBLE ROTATIONS:$possibleRotations")
+            tileStatuses.keys.forEach {
                 it.updateToPotentialPoint()
             }
+            previousRotationMatrix = rotationMatrix
         }
 
         return tileStatuses
@@ -124,13 +158,18 @@ class Tetromino(private val grid: GameGrid){
     }
 
     fun update(){
+
+        //Set this tetromino as grounded if any tile is at the last row spot
         tiles.forEach {
-            //Set this tetromino as grounded if any tile is at last row spot
             if(it.getPoint().x == grid.getRows()-1){
                 this.setIsGrounded(true)
             }
         }
-        shift(grid.getGravityDirection()) //Apply gravity
+
+        //Apply gravity
+        if(grid.getGravityEnabled()){
+            shift(grid.getGravityDirection())
+        }
     }
 
     fun getIsPreservedForm():Boolean{

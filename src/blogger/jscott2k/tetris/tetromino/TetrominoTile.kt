@@ -118,6 +118,7 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             Direction.DOWN -> downTileTileCollision(otherTile)
             Direction.RIGHT -> tileTileCollision(otherTile)
             Direction.LEFT -> tileTileCollision(otherTile)
+            Direction.ROTATION -> tileTileCollision(otherTile)
             else -> TileStatus.SUCCESS
         }
     }
@@ -146,9 +147,11 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
         return tileStatus
     }
 
-    fun rotate(rotation:RotationMatrix):TileStatus {
+    fun rotate(rotationMatrix:RotationMatrix):TileStatus {
         println("REL POS: ${getRelativePosition()}")
-        potentialPoint = (this.getPoint() + (rotation * getRelativePosition())) + this.getRelativePosition()
+
+        potentialPoint = (this.getPoint() + (rotationMatrix * getRelativePosition())) + this.getRelativePosition()
+
         return getTranslationStatus(Direction.ROTATION)
     }
 
