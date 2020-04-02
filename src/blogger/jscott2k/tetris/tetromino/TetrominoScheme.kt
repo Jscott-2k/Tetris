@@ -1,8 +1,6 @@
 package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.utils.Vec2Int
-import java.util.*
-import kotlin.collections.ArrayList
 
 const val P: Boolean = true
 const val X: Boolean = false

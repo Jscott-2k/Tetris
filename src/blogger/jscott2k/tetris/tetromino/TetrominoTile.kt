@@ -1,10 +1,10 @@
 package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
-import blogger.jscott2k.tetris.game.GameGrid
-import blogger.jscott2k.tetris.utils.Vec2Int
 import blogger.jscott2k.tetris.enums.TileStatus
+import blogger.jscott2k.tetris.game.GameGrid
 import blogger.jscott2k.tetris.utils.RotationMatrix
+import blogger.jscott2k.tetris.utils.Vec2Int
 
 class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
 

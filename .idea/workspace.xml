@@ -6,11 +6,24 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="">
+    <list default="true" id="76ca773d-98d5-4afa-9be9-310be87681a6" name="Default Changelist" comment="- Refactored Game Grid and RotationMatrix">
+      <change afterPath="$PROJECT_DIR$/.idea/libraries/hamcrest_core_1_3.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Tetris.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Tetris.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Tetris_jar/Tetris.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$removeEmptyTetrominos$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid$removeEmptyTetrominos$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/GameGrid.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/InputManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/game/Player.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/Tetromino.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme$Companion.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme$Companion.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Tetris/blogger/jscott2k/tetris/tetromino/TetrominoScheme.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/GameGrid.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/RotationMatrix.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/utils/RotationMatrix.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/InputManager.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/game/Player.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/Tetromino.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoScheme.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoTile.kt" beforeDir="false" afterPath="$PROJECT_DIR$/src/blogger/jscott2k/tetris/tetromino/TetrominoTile.kt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,6 +40,8 @@
         <option value="Kotlin Object" />
         <option value="Kotlin Enum" />
         <option value="Kotlin Class" />
+        <option value="Class" />
+        <option value="JUnit5 Test Class" />
       </list>
     </option>
   </component>
@@ -39,34 +54,44 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
     <option name="SIGN_OFF_COMMIT" value="true" />
+    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="1" />
   </component>
   <component name="ProjectId" id="1Zlpuf6gLQrEt4BAF7zodemcxpd" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GenerateAntBuildDialog.forceTargetJdk" value="true" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="tetris" />
+    <property name="Repository.Attach.Annotations" value="true" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/build" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit5" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5" value="" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar!/" />
+    <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="project.structure.side.proportion" value="0.1908046" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateKotlinClassDialog.RecentsKey">
-      <recent name="blogger.jscott2k.tetris.tetromino" />
-      <recent name="" />
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="blogger.jscott2k.tetris.game" />
+      <recent name="blogger.jscott2k.tetris.tests" />
     </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="blogger.jscott2k.tetris.utils" />
@@ -77,6 +102,13 @@
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Kotlin Projects\Tetris\src\blogger\jscott2k\tetris" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="blogger.jscott2k.tetris.tetromino" />
+      <recent name="" />
     </key>
   </component>
   <component name="RunManager" selected="Kotlin.DriverKt (1)">
@@ -217,10 +249,18 @@
       <option name="project" value="LOCAL" />
       <updated>1585783229530</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="- Refactored Game Grid and RotationMatrix">
+      <created>1585783804410</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1585783804410</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Updated spawn point to offset by pivots. Implemented &quot;only&quot; command to restrict to specific tetromino schemes for testing purposes. Added subtraction operator for Vec2Int" />
     <MESSAGE value="Fixed specific game crash when 'I' tetromino is spawned. Refactored Tetromino, GameGrid and GameManager. Additions to tetromino." />
     <MESSAGE value=" - Reworked input manager and exception handling&#10; - Changed GameManager nextFrame() to allow multiple inputs on certain exceptions or accidental inputs&#10; - Added return for input manager actions" />
@@ -228,12 +268,14 @@
     <MESSAGE value="- Improvements to row clearing and shifting algorithm&#10;- Commands do not work/frame does not advance when user enters command that does not exist&#10;- Tetromino has two new properties. lockedInPlace and isPreservedForm. &#10;- Tiles have own isGrounded property&#10;- Many new ShiftStatus constants added&#10;- Tile collision refactored" />
     <MESSAGE value="- Preliminary RotationMatrix, with rotation. No options. Rotation command&#10;- Fixed alignment bug" />
     <MESSAGE value="- Included previous build from last commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="- Included previous build from last commit" />
+    <MESSAGE value="- Refactored Game Grid and RotationMatrix" />
+    <option name="LAST_COMMIT_MESSAGE" value="- Refactored Game Grid and RotationMatrix" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585454293471">
+    <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585838858994">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585838858994" />
     <state x="202" y="135" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585454293471" />
     <state x="479" y="252" key="#com.intellij.ide.actions.ChooseComponentsToExportDialog" timestamp="1585453751891">
       <screen x="0" y="0" width="1536" height="824" />
@@ -243,10 +285,15 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="541" y="128" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1585482628141" />
-    <state x="736" y="288" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585454272052">
+    <state x="736" y="288" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1585786210906">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="736" y="288" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585786210906" />
     <state x="736" y="288" key="#com.intellij.ide.util.TreeClassChooserDialog/0.0.1536.824@0.0.1536.824" timestamp="1585454272052" />
+    <state x="599" y="44" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog" timestamp="1585839061937">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="599" y="44" key="#com.intellij.openapi.roots.ui.configuration.libraryEditor.LibraryEditorDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839061937" />
     <state x="449" y="142" key="#com.intellij.openapi.updateSettings.impl.PluginUpdateInfoDialog" timestamp="1585665095403">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -256,47 +303,48 @@
     </state>
     <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585774802936" />
     <state x="425" y="0" key="#com.intellij.refactoring.rename.AutomaticRenamingDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486525856" />
-    <state x="533" y="0" width="473" height="824" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1585666201048">
+    <state x="533" y="0" width="473" height="824" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog" timestamp="1585838696217">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="533" y="0" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585666201048" />
+    <state x="533" y="0" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585838696217" />
     <state x="533" y="0" width="473" height="824" key="#org.jetbrains.kotlin.idea.refactoring.move.moveDeclarations.ui.MoveKotlinTopLevelDeclarationsDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486755736" />
     <state x="507" y="248" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1" timestamp="1585669412916">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="507" y="248" key="ANALYSIS_DLG_com.intellij.analysis.BaseAnalysisAction$1/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585669412916" />
-    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2" timestamp="1585783228188">
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2" timestamp="1585784634543">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585783228188" />
-    <state x="2252" y="175" key="DiffContextDialog" timestamp="1585721836510">
+    <state x="2015" y="5" width="1719" height="1035" key="CommitChangelistDialog2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585784634543" />
+    <state x="2252" y="175" key="DiffContextDialog" timestamp="1585783784646">
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
-    <state x="2252" y="175" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585721836510" />
-    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585454339148">
+    <state x="2252" y="175" key="DiffContextDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585783784646" />
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1585839305346">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839305346" />
     <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1585454339148" />
     <state x="571" y="322" key="Github.CreateGistDialog" timestamp="1585519451451">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="571" y="322" key="Github.CreateGistDialog/0.0.1536.824@0.0.1536.824" timestamp="1585519451451" />
-    <state width="1495" height="582" key="GridCell.Tab.0.bottom" timestamp="1585782594196">
+    <state width="1495" height="112" key="GridCell.Tab.0.bottom" timestamp="1585839803303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="582" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
-    <state width="1495" height="582" key="GridCell.Tab.0.center" timestamp="1585782594196">
+    <state width="1495" height="112" key="GridCell.Tab.0.bottom/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839803303" />
+    <state width="1495" height="112" key="GridCell.Tab.0.center" timestamp="1585839803302">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="582" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
-    <state width="1495" height="582" key="GridCell.Tab.0.left" timestamp="1585782594196">
+    <state width="1495" height="112" key="GridCell.Tab.0.center/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839803302" />
+    <state width="1495" height="112" key="GridCell.Tab.0.left" timestamp="1585839803302">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="582" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
-    <state width="1495" height="582" key="GridCell.Tab.0.right" timestamp="1585782594196">
+    <state width="1495" height="112" key="GridCell.Tab.0.left/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839803302" />
+    <state width="1495" height="112" key="GridCell.Tab.0.right" timestamp="1585839803303">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1495" height="582" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585782594196" />
+    <state width="1495" height="112" key="GridCell.Tab.0.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839803303" />
     <state width="1495" height="75" key="GridCell.Tab.1.bottom" timestamp="1585684562981">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -317,23 +365,37 @@
     </state>
     <state width="1495" height="75" key="GridCell.Tab.1.right/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585684562981" />
     <state width="1495" height="182" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1585474419588" />
-    <state x="249" y="0" key="SettingsEditor" timestamp="1585454349786">
+    <state x="69" y="24" width="1038" height="791" key="SettingsEditor" timestamp="1585839145663">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="69" y="24" width="1038" height="791" key="SettingsEditor/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839145663" />
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1585454349786" />
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2" timestamp="1585784687720">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="361" y="141" key="Vcs.Push.Dialog.v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585784687720" />
     <state x="409" y="236" key="com.intellij.ide.util.TipDialog" timestamp="1585772675106">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585772675106" />
     <state x="409" y="236" key="com.intellij.ide.util.TipDialog/0.0.1536.824@0.0.1536.824" timestamp="1585486589084" />
-    <state x="553" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585667566289">
+    <state x="438" y="302" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1585838387884">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="553" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585667566289" />
-    <state x="94" y="0" key="new project wizard" timestamp="1585439219793">
+    <state x="438" y="302" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585838387884" />
+    <state x="553" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585784643254">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
+    <state x="553" y="324" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585784643254" />
+    <state x="-143" y="0" key="new project wizard" timestamp="1585839259609">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="-143" y="0" key="new project wizard/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585839259609" />
     <state x="94" y="0" key="new project wizard/0.0.1536.824@0.0.1536.824" timestamp="1585439219793" />
+    <state x="488" y="90" width="493" height="644" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog" timestamp="1585838673491">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="488" y="90" width="493" height="644" key="org.jetbrains.kotlin.idea.testIntegration.KotlinCreateTestDialog/0.0.1536.824/1920.0.1920.1040@0.0.1536.824" timestamp="1585838673491" />
     <state x="510" y="52" key="refactoring.ChangeSignatureDialog" timestamp="1585747551380">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

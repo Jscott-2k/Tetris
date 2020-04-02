@@ -194,9 +194,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
                 println("\t\tFOUND: $additionalTilesAtOrAboveRow")
 
                 it.setIsGrounded(false)
-
-                //If the tetromino is missing a tile it should have NOT have a preserved form
-                it.setIsPreservedForm(it.getTilesLeft() == 4)
+                it.setIsPreservedForm(false)
             }
         }
         println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
@@ -214,6 +212,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             }
         tilesAtOrAboveRow.forEach {
             it.parent.setLockedInPlace(false) //Unlock tetromino's previouslylocked in place by re-alignment
+            it.parent.setIsPreservedForm((it.parent.getTiles().size==4))
         }
     }
 

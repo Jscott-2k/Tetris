@@ -1,8 +1,5 @@
 package blogger.jscott2k.tetris.game
 
-import java.lang.Exception
-import java.lang.NullPointerException
-
 object InputManager {
 
     var inputActionMap: MutableMap<String, (args:List<String>) -> Boolean> = mutableMapOf()

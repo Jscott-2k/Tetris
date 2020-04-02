@@ -2,8 +2,6 @@ package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.tetromino.Tetromino
-import java.lang.IllegalArgumentException
-import java.lang.NumberFormatException
 import kotlin.math.absoluteValue
 
 class Player{

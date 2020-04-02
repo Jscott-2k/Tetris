@@ -24,6 +24,7 @@ class Tetromino(private val grid: GameGrid){
         if(!canSpawn){
             return tile
         }
+
         canSpawn = setTilePointFromScheme(index, tile)
         return tile
     }
