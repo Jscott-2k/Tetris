@@ -105,7 +105,7 @@ enum class TetrominoScheme(
                 booleanArrayOf(
                     P, X, X, X
                 ), booleanArrayOf(
-                    P, P, P, P
+                    P, P, P, X
                 ), booleanArrayOf(
                     X, X, X, X
                 ), booleanArrayOf(
@@ -113,7 +113,7 @@ enum class TetrominoScheme(
                 )
             )
         ),
-        charIdentifier = 'J', pivotPoint = Vec2Int(1, 2)
+        charIdentifier = 'J', pivotPoint = Vec2Int(1, 1)
     ),
     L(
         TetrominoArrangement(
@@ -130,7 +130,7 @@ enum class TetrominoScheme(
                 )
             )
         ),
-        charIdentifier = 'L', pivotPoint = Vec2Int(1, 1)
+        charIdentifier = 'L', pivotPoint = Vec2Int(1, 2)
     );
 
     companion object {
