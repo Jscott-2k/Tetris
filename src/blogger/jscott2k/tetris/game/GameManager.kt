@@ -25,6 +25,33 @@ object GameManager {
     private var isRunning: Boolean = false
     private var allowAdditionalInput:Boolean = false
 
+    private var score:Int = 0
+
+    private var nextPlayerScheme:TetrominoScheme? = null
+
+    fun getNextPlayerScheme():TetrominoScheme?{
+        return nextPlayerScheme
+    }
+    fun setNextPlayerScheme(nextScheme:TetrominoScheme){
+        this.nextPlayerScheme = nextScheme
+    }
+
+    fun getScore():Int{
+        return score
+    }
+    fun addScore(rowsCleared:Int){
+
+        if(rowsCleared<=0){return}
+
+        score += when(rowsCleared){
+            1 -> 40
+            2 -> 100
+            3 -> 300
+            4 -> 1200
+            else -> 1200
+        }
+    }
+
     fun getDefaultTile():TetrominoTile{
         return TetrominoTile(Tetromino(grid), grid = grid)
     }
@@ -160,4 +187,12 @@ object GameManager {
         return player
     }
 
+    fun generateScheme(): TetrominoScheme {
+        if(nextPlayerScheme==null){
+            nextPlayerScheme = TetrominoScheme.getRandom()
+        }
+        val scheme:TetrominoScheme = nextPlayerScheme ?: TetrominoScheme.getRandom()
+        nextPlayerScheme = TetrominoScheme.getRandom()
+        return scheme
+    }
 }

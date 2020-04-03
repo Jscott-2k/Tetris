@@ -10,7 +10,7 @@ import blogger.jscott2k.tetris.utils.Vec2Int
 
 class Tetromino(private val grid: GameGrid){
 
-    private val scheme: TetrominoScheme = TetrominoScheme.getRandom()
+    private val scheme: TetrominoScheme = GameManager.generateScheme()
     private var rotationIndex:Int = 0
     private val possibleRotations:Int = scheme.getMaxRotationIndex()
     private var isGrounded:Boolean = false
@@ -25,7 +25,6 @@ class Tetromino(private val grid: GameGrid){
         if(!canSpawn){
             return tile
         }
-
         canSpawn = setTilePointFromScheme(index, tile)
         return tile
     }
@@ -47,8 +46,6 @@ class Tetromino(private val grid: GameGrid){
     }
 
     init{
-
-
 
         println("Created new Tetromino")
         println("\tScheme: ${scheme.name}")

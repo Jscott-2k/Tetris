@@ -2,18 +2,21 @@ package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.tetromino.Tetromino
+import blogger.jscott2k.tetris.tetromino.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
 import blogger.jscott2k.tetris.utils.Vec2Int
+import kotlin.math.floor
 
 
 class GameGrid(private val rows: Int, private val cols: Int) {
 
+    private val rowDisplayStart:Int = 2
     private val rowDeathRange:IntRange = 0 until 3
     private val colDeathRange:IntRange = 0 until cols
     private val tetrominoes: ArrayList<Tetromino> = ArrayList()
     private val display: Array<Array<Char>> = Array(rows){Array(cols){' '}}
     private val colDisplayRange: IntRange = 0 until cols
-    private val rowDisplayRange: IntRange = 2 until rows //First two rows hidden
+    private val rowDisplayRange: IntRange = rowDisplayStart until rows //First two rows hidden
     private val spawnPoint: Vec2Int = Vec2Int(x = 1, y = 4)
     private val gravityDirection: Direction = Direction.DOWN
     private var gravityEnabled:Boolean = true
@@ -44,11 +47,6 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         return false
     }
 
-//    fun applyGravity(){
-//        tetrominos.forEach {
-//           it.shift(gravityDirection)
-//        }
-//    }
 
     private fun requestPlayerSpawn():Boolean{
         return GameManager.createPlayerTetromino()
@@ -109,12 +107,15 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
     private fun printDisplay(){
 
+        val gameDetailsPos:Int = floor(rows.toFloat() / 2f).toInt()
+
         println()
         for(i:Int in 0..(rows.toString().length + (cols*2) + 4)){
             print("=")
         }
         println()
         for (row: Int in rowDisplayRange) {
+            
             print("$row:")
 
             val spaces:Int = rows.toString().length - row.toString().length
@@ -127,12 +128,22 @@ class GameGrid(private val rows: Int, private val cols: Int) {
                 print("${display[row][col]} ")
             }
             print("#")
+
+            if(row==gameDetailsPos){
+                printGameDetailLine()
+            }
+
             println()
         }
         for(i:Int in 0..(rows.toString().length + (cols*2) + 4)){
             print("=")
         }
         println()
+    }
+
+    private fun printGameDetailLine(offset:Int = 5) {
+        val spaceOffset:String = String(Array(size = offset){' '}.toCharArray())
+        print("$spaceOffset Next Tetromino:  ${GameManager.getNextPlayerScheme()}; Score: ${GameManager.getScore()}" )
     }
 
     fun display() {
@@ -207,6 +218,9 @@ class GameGrid(private val rows: Int, private val cols: Int) {
                 it.setIsPreservedForm(false)
             }
         }
+
+
+
         println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
         tilesAtOrAboveRow  //Tiles have to be first be sorted so that tiles further below get shifted first
             .sortedWith(compareByDescending<TetrominoTile>{it.getPoint().x}.thenByDescending{it.parent.getIsPreservedForm()})
@@ -260,6 +274,9 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
         //Attempt to shift all tiles ABOVE the removed row DOWN
         removedRows.forEach {alignTilesAfterRowRemoval(it)}
+
+        //Update score
+        GameManager.addScore(removedRows.size)
     }
 
     fun getSpawnPoint(): Vec2Int {
