@@ -6,6 +6,7 @@ import blogger.jscott2k.tetris.game.GameGrid
 import blogger.jscott2k.tetris.game.GameManager
 import blogger.jscott2k.tetris.utils.RotationMatrix
 import blogger.jscott2k.tetris.utils.Vec2Int
+import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
 
 
 class Tetromino(private val grid: GameGrid){
@@ -64,29 +65,30 @@ class Tetromino(private val grid: GameGrid){
     private fun calculateRotationIndex(dr:Int):Int{
 
         if(dr == 0 ){return rotationIndex}
-
         return ((dr+rotationIndex) % possibleRotations + possibleRotations) % possibleRotations
     }
 
-    fun getRotationMatrix(dr:Int):RotationMatrix{
+//    private fun getRotationMatrix(dr:Int):RotationMatrix{
 
-        var rotationMatrix:RotationMatrix = if(dr<0){
-                RotationMatrix.COUNTER_CLOCKWISE
-            }else{
-                RotationMatrix.CLOCKWISE
-            }
-        rotationMatrix = when(scheme){
-            TetrominoScheme.I -> {
-                when(previousRotationMatrix) {
-                    RotationMatrix.CLOCKWISE ->  RotationMatrix.COUNTER_CLOCKWISE
-                    else -> RotationMatrix.CLOCKWISE
-                }
-            }
-            else -> rotationMatrix
-        }
-
-        return rotationMatrix
-    }
+//        var rotationMatrix:RotationMatrix = if(dr<0){
+//                RotationMatrix.COUNTER_CLOCKWISE
+//            }else{
+//                RotationMatrix.CLOCKWISE
+//            }
+//
+//
+//        rotationMatrix = when(scheme){
+//            TetrominoScheme.I -> {
+//                when(previousRotationMatrix) {
+//                    RotationMatrix.CLOCKWISE ->  RotationMatrix.COUNTER_CLOCKWISE
+//                    else -> RotationMatrix.CLOCKWISE
+//                }
+//            }
+//            else -> rotationMatrix
+//        }
+//
+//        return RotationMatrix.createRotationMatrix(dr>0,  scheme.getRotationAmount())
+//    }
 
     fun rotate(dr:Int):MutableMap<TetrominoTile, TileStatus>{
 
@@ -98,7 +100,11 @@ class Tetromino(private val grid: GameGrid){
 
         if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
 
-        val rotationMatrix:RotationMatrix = getRotationMatrix(dr)
+        val rotationMatrix:RotationMatrix = RotationMatrix.createRotationMatrix(
+                clockwise = scheme.calculateRotationDirection(dr, rotationIndex),
+                theta = scheme.getRotationAmountAsRadians())
+
+        println("\tROTATION MATRIX: $rotationMatrix")
 
         val tileStatuses:MutableMap<TetrominoTile, TileStatus> = mutableMapOf()
 

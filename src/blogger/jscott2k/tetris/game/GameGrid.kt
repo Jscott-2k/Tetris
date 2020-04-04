@@ -2,7 +2,7 @@ package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.tetromino.Tetromino
-import blogger.jscott2k.tetris.tetromino.TetrominoScheme
+import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
 import blogger.jscott2k.tetris.utils.Vec2Int
 import kotlin.math.floor

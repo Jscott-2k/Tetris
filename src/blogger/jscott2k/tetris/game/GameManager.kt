@@ -1,7 +1,7 @@
 package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.tetromino.Tetromino
-import blogger.jscott2k.tetris.tetromino.TetrominoScheme
+import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
 
 /**
@@ -191,7 +191,7 @@ object GameManager {
         if(nextPlayerScheme==null){
             nextPlayerScheme = TetrominoScheme.getRandom()
         }
-        val scheme:TetrominoScheme = nextPlayerScheme ?: TetrominoScheme.getRandom()
+        val scheme: TetrominoScheme = nextPlayerScheme ?: TetrominoScheme.getRandom()
         nextPlayerScheme = TetrominoScheme.getRandom()
         return scheme
     }
