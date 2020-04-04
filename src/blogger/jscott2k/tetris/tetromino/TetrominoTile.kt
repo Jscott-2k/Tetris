@@ -120,15 +120,14 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
         return tileStatus
     }
 
+
     fun rotate(rotationMatrix:RotationMatrix):TileStatus {
-        println("REL POS: ${getRelativePosition()}")
-
-        potentialPoint = (this.getPoint() + (rotationMatrix * getRelativePosition())) + this.getRelativePosition()
-
+        potentialPoint = (getPoint() + (rotationMatrix * getRelativePoint())) + getRelativePoint()
         return getTranslationStatus(Direction.ROTATION)
     }
 
-    fun getRelativePosition():Vec2Int{
+
+    fun getRelativePoint():Vec2Int{
         return (parent.getPivotTile().getPoint() - this.getPoint())
     }
 

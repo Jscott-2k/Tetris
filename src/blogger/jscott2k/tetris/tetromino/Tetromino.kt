@@ -83,10 +83,7 @@ class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
 
         rotationIndex = calculateRotationIndex(dr)
 
-        if(possibleRotations <= 1 ){
-            return mutableMapOf(GameManager.getDefaultTile() to TileStatus.NO_ROTATION)
-        }
-
+        if(possibleRotations <= 1 ){ return mutableMapOf(GameManager.getDefaultTile() to TileStatus.NO_ROTATION) }
         if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
 
         val rotationMultiplier:Int = dr.absoluteValue.also{

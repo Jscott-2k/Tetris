@@ -68,10 +68,14 @@ object GameManager {
             end()
             return@addInputAction true
         }
+
         InputManager.addInputAction(key = "rotate") {args ->
-            player.rotate(rotationDirection = args.getOrElse(index = 0){"RIGHT"}, amount = args.getOrElse(index = 1){"1"})
+            player.rotate(
+                rotationDirection = args.getOrElse(index = 0){"RIGHT"},
+                amount = args.getOrElse(index = 1){"1"})
             return@addInputAction false
         }
+
         InputManager.addInputAction(key = "move") { args ->
 
             player.move(

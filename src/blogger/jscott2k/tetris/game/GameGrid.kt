@@ -201,7 +201,9 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
     private fun readyTileRowRealignment(rowRemoved:Int):MutableList<TetrominoTile>{
         println("\tFINDING TILES ABOVE ROW $rowRemoved TO BE REALIGNED...")
+
         val tilesAtOrAboveRow:MutableList<TetrominoTile> = mutableListOf()
+
         tetrominoes.forEach {
             //Retrieve all tiles above the removed row
             val additionalTilesAtOrAboveRow:MutableList<TetrominoTile> = it.getTilesAtOrAboveRow(rowRemoved)
@@ -249,6 +251,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             }
         }
     }
+
     private fun removeFilledRows(){
 
         val removedRows:ArrayList<Int> = arrayListOf()
