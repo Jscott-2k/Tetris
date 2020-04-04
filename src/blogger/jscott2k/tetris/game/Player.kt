@@ -2,6 +2,7 @@ package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.tetromino.Tetromino
+import java.lang.IllegalArgumentException
 import kotlin.math.absoluteValue
 
 class Player{
@@ -43,8 +44,10 @@ class Player{
         if(rotationDirection.toUpperCase() == "LEFT")
             println("\tSTATUS: ${tetromino?.rotate(-(amount.toInt().absoluteValue))}")
 
-        else{
+        else if(rotationDirection.toUpperCase() == "RIGHT"){
             println("\tSTATUS: ${tetromino?.rotate(amount.toInt().absoluteValue)}")
+        }else{
+            throw IllegalArgumentException("NO ROTATION DIRECTION SPECIFIED! e.g Try 'rotate left' or 'rotate right'")
         }
     }
 }

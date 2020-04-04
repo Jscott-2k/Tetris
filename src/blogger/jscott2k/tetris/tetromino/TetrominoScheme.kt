@@ -15,6 +15,8 @@ object Scheme {
         private val rotationAmount:Int = 90,
         private val calculateRotationDirection:(Int, Int)->Boolean = { dr:Int, _:Int -> (dr>0)}
     ) {
+
+        PLACE_HOLDER(TetrominoArrangement(configure = arrayOf(booleanArrayOf(P))), charIdentifier = '?', pivotPoint = Vec2Int(0, 0)),
         I(
             TetrominoArrangement(
                 configure =
@@ -29,7 +31,7 @@ object Scheme {
                         X, X, X, X
                     )
                 )
-            ), charIdentifier = 'I', pivotPoint = Vec2Int(0, 1), maxRotationIndex = 2, rotationAmount = 90,
+            ), charIdentifier = 'I', pivotPoint = Vec2Int(0, 1), maxRotationIndex = 2,
             calculateRotationDirection = { _:Int, index:Int -> (index==0)}
         ),
         O(
@@ -140,13 +142,13 @@ object Scheme {
 
         companion object {
 
-            private var allowedSchemes:MutableList<TetrominoScheme> = values().toMutableList()
+            private var allowedSchemes:MutableList<TetrominoScheme> = getDefaultAllowedSchemes()
 
             fun getRandom(): TetrominoScheme {
                 return allowedSchemes.random()
             }
             fun setAllowedSchemes(allowedSchemes:List<TetrominoScheme>){
-                println("SETTING ALLOWED TETROMINOS: $allowedSchemes")
+                println("SETTING ALLOWED TETROMINOES: $allowedSchemes")
                 Companion.allowedSchemes = allowedSchemes.toMutableList()
             }
             fun removeAllowedScheme(scheme: TetrominoScheme){
@@ -156,7 +158,10 @@ object Scheme {
                 return allowedSchemes
             }
             fun setDefaultAllowedSchemes(){
-                allowedSchemes = values().toMutableList()
+                allowedSchemes = getDefaultAllowedSchemes()
+            }
+            fun getDefaultAllowedSchemes():MutableList<TetrominoScheme>{
+                return  values().toMutableList().apply { remove(PLACE_HOLDER) }
             }
         }
 
@@ -165,6 +170,11 @@ object Scheme {
         }
 
         fun getGridPoint(index: Int): Vec2Int {
+
+            if(this == PLACE_HOLDER){
+                return Vec2Int(x = 0,y = 0)
+            }
+
             return arrangement.getAsOriginGridPoints()[index]
         }
 
@@ -175,10 +185,9 @@ object Scheme {
             return maxRotationIndex
         }
 
-        fun getRotationAmountAsRadians():Double{
-            return Math.toRadians(this.rotationAmount.toDouble())
+        fun getRotationAmountAsRadians(dr:Int):Double{
+            return Math.toRadians(this.rotationAmount.toDouble() * dr)
         }
-
         fun calculateRotationDirection(dr:Int, rotationIndex:Int):Boolean{
             return calculateRotationDirection.invoke(dr, rotationIndex)
         }

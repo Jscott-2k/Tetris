@@ -7,19 +7,41 @@ import blogger.jscott2k.tetris.game.GameManager
 import blogger.jscott2k.tetris.utils.RotationMatrix
 import blogger.jscott2k.tetris.utils.Vec2Int
 import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
+import kotlin.math.absoluteValue
 
 
-class Tetromino(private val grid: GameGrid){
+class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
 
-    private val scheme: TetrominoScheme = GameManager.generateScheme()
+    private var scheme: TetrominoScheme = if(placeholder) TetrominoScheme.PLACE_HOLDER else GameManager.generateScheme()
     private var rotationIndex:Int = 0
     private val possibleRotations:Int = scheme.getMaxRotationIndex()
     private var isGrounded:Boolean = false
     private var canSpawn:Boolean = true
-    private val tiles: MutableList<TetrominoTile> = MutableList(size = 4){initTile(it)}
+    private val tiles: MutableList<TetrominoTile> = MutableList(size = 4){
+        initTile(it)
+    }
     private var isPreservedForm:Boolean = true
     private var lockedInPlace:Boolean = false
     private var previousRotationMatrix:RotationMatrix? = null
+
+
+    init{
+            println("Created new Tetromino")
+            println("\tScheme: ${scheme.name}")
+            print("\tPoints:")
+            tiles.forEach {print(" ${it.getPoint()}")}
+            println()
+            println("\tPivot:${scheme.getPivotPoint()}")
+            println("\tCan Spawn:$canSpawn")
+    }
+
+
+    companion object{
+        private val placeHolderTetromino:Tetromino = Tetromino(GameManager.getGrid(), placeholder = true)
+        fun getPlaceHolderTetromino():Tetromino{
+            return placeHolderTetromino
+        }
+    }
 
     private fun initTile(index:Int):TetrominoTile{
         val tile = TetrominoTile(parent = this, grid = grid)
@@ -46,17 +68,6 @@ class Tetromino(private val grid: GameGrid){
         return atiles
     }
 
-    init{
-
-        println("Created new Tetromino")
-        println("\tScheme: ${scheme.name}")
-        print("\tPoints:")
-        tiles.forEach {print(" ${it.getPoint()}")}
-        println()
-        println("\tPivot:${scheme.getPivotPoint()}")
-        println("\tCan Spawn:$canSpawn")
-
-    }
 
     fun getCanSpawn():Boolean{
         return canSpawn
@@ -78,9 +89,15 @@ class Tetromino(private val grid: GameGrid){
 
         if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
 
+        val rotationMultiplier:Int = dr.absoluteValue.also{
+            if(it>possibleRotations){println("\tROTATION MULTIPLIER TOO LARGE, REDUCING TO: $possibleRotations")}
+        }.coerceAtMost(possibleRotations)
+
+        println("\tROTATION MULTIPLIER: $rotationMultiplier")
+
         val rotationMatrix:RotationMatrix = RotationMatrix.createRotationMatrix(
                 clockwise = scheme.calculateRotationDirection(dr, rotationIndex),
-                theta = scheme.getRotationAmountAsRadians())
+                theta = scheme.getRotationAmountAsRadians(rotationMultiplier))
 
         println("\tROTATION MATRIX: $rotationMatrix")
 

@@ -199,8 +199,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         }
     }
 
-    private fun alignTilesAfterRowRemoval(rowRemoved:Int){
-
+    private fun readyTileRowRealignment(rowRemoved:Int):MutableList<TetrominoTile>{
         println("\tFINDING TILES ABOVE ROW $rowRemoved TO BE REALIGNED...")
         val tilesAtOrAboveRow:MutableList<TetrominoTile> = mutableListOf()
         tetrominoes.forEach {
@@ -215,24 +214,23 @@ class GameGrid(private val rows: Int, private val cols: Int) {
                 it.setIsGrounded(false)
             }
         }
+        return tilesAtOrAboveRow
+    }
+
+    private fun alignTilesAfterRowRemoval(rowRemoved:Int){
+
+        val tilesAtOrAboveRow:MutableList<TetrominoTile> = readyTileRowRealignment(rowRemoved)
 
         println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
         tilesAtOrAboveRow  //Tiles have to be first be sorted so that tiles further below get shifted first
-            .sortedWith(compareByDescending<TetrominoTile>{it.getPoint().x})
+            .sortedWith(compareByDescending{it.getPoint().x})
             .forEach{
                 //Each tile needs to try and shift downwards. If it is unpreserved the whole parent will be shifted downwards
                 println("\tTILE REALIGNED FROM: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
                 it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
-//                if(!it.parent.getIsPreservedForm()){
-//                    it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
-//                }else{
-//                    it.parent.shift(Direction.DOWN) //Shift entire tetromino downwards when is preserved
-//                    it.parent.setLockedInPlace(true) //Do not shift this tetromino any more in this for each. Only needs to be shifted once
-//                }
                 println("\t\tTO: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
             }
         tilesAtOrAboveRow.forEach {
-//            it.parent.setLockedInPlace(false) //Unlock tetromino's previously locked
             it.parent.setIsPreservedForm((it.parent.getTiles().size==4))
         }
     }

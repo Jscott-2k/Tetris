@@ -15,10 +15,11 @@ import blogger.jscott2k.tetris.tetromino.TetrominoTile
 object GameManager {
 
     /**
-     * Create the tetris grid 10 x 16
+     * Create the tetris grid 10 x 22
      */
-    private val ROWS: Int = 16
-    private val COLS: Int = 10
+    private const val ROWS: Int = 22
+    private const val COLS: Int = 10
+
     private var player: Player = Player()
 
     private var grid: GameGrid = GameGrid(ROWS, COLS)
@@ -56,7 +57,7 @@ object GameManager {
     }
 
     fun getDefaultTile():TetrominoTile{
-        return TetrominoTile(Tetromino(grid), grid = grid)
+        return TetrominoTile(Tetromino.getPlaceHolderTetromino(), grid = grid)
     }
 
     fun start() {

@@ -48,32 +48,6 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             potentialCollidedTile != null -> this.onTileTileCollision(direction, potentialCollidedTile)
             else -> TileStatus.SUCCESS
         }
-
-//        if(parent.getIsGrounded() && parent.getIsPreservedForm()){
-//            return TileStatus.GROUNDED_WITH_FORM_PRESERVED
-//        }else if((!parent.getIsPreservedForm()) && (this.isGrounded)){
-//            return TileStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
-//        }
-//        else if(potentialPoint.y >= grid.getCols() ){
-//            return TileStatus.OUTSIDE_COLUMN_RIGHT
-//        }
-//        else if(potentialPoint.y < 0){
-//            return TileStatus.OUTSIDE_COLUMN_LEFT
-//        }
-//        else if(potentialPoint.x >= grid.getRows()){
-//            this.onTileBottomRowCollision()
-//            return TileStatus.OUTSIDE_ROW_BOTTOM
-//        }
-//        else if(potentialPoint.x < 0){
-//            return TileStatus.OUTSIDE_ROW_TOP
-//        }
-//        else if(potentialCollidedTile!=null){
-//            return this.onTileTileCollision(direction, potentialCollidedTile)
-//        }
-//        else{
-//            return TileStatus.SUCCESS
-//        }
-//    }
     }
     private fun shift(direction: Direction, shiftPoint: Vec2Int): TileStatus {
 
