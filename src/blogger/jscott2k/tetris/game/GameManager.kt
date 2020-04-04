@@ -25,6 +25,8 @@ object GameManager {
     private var isRunning: Boolean = false
     private var allowAdditionalInput:Boolean = false
 
+    private var linesCleared:Int = 0
+
     private var score:Int = 0
 
     private var nextPlayerScheme:TetrominoScheme? = null
@@ -50,6 +52,7 @@ object GameManager {
             4 -> 1200
             else -> 1200
         }
+        linesCleared += rowsCleared
     }
 
     fun getDefaultTile():TetrominoTile{
@@ -185,6 +188,9 @@ object GameManager {
     }
     fun getPlayer():Player{
         return player
+    }
+    fun getLinesCleared():Int{
+        return linesCleared
     }
 
     fun generateScheme(): TetrominoScheme {

@@ -1,3 +1,0 @@
-Manifest-Version: 1.0
-Main-Class: blogger.jscott2k.tetris.DriverKt
-

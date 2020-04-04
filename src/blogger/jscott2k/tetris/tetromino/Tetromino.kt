@@ -39,7 +39,7 @@ class Tetromino(private val grid: GameGrid){
         val atiles:MutableList<TetrominoTile> = mutableListOf()
 
         tiles.forEach {
-            if(it.getPoint().x <= row){
+            if(it.getPoint().x < row){
                 atiles.add(it)
             }
         }
@@ -67,28 +67,6 @@ class Tetromino(private val grid: GameGrid){
         if(dr == 0 ){return rotationIndex}
         return ((dr+rotationIndex) % possibleRotations + possibleRotations) % possibleRotations
     }
-
-//    private fun getRotationMatrix(dr:Int):RotationMatrix{
-
-//        var rotationMatrix:RotationMatrix = if(dr<0){
-//                RotationMatrix.COUNTER_CLOCKWISE
-//            }else{
-//                RotationMatrix.CLOCKWISE
-//            }
-//
-//
-//        rotationMatrix = when(scheme){
-//            TetrominoScheme.I -> {
-//                when(previousRotationMatrix) {
-//                    RotationMatrix.CLOCKWISE ->  RotationMatrix.COUNTER_CLOCKWISE
-//                    else -> RotationMatrix.CLOCKWISE
-//                }
-//            }
-//            else -> rotationMatrix
-//        }
-//
-//        return RotationMatrix.createRotationMatrix(dr>0,  scheme.getRotationAmount())
-//    }
 
     fun rotate(dr:Int):MutableMap<TetrominoTile, TileStatus>{
 
@@ -148,7 +126,13 @@ class Tetromino(private val grid: GameGrid){
     }
 
     fun setIsGrounded(isGrounded:Boolean){
-        this.isGrounded = isGrounded
+
+        if(this.isPreservedForm){
+            this.isGrounded = isGrounded
+        }else{
+            tiles.forEach { it.setIsGrounded(isGrounded) }
+        }
+
     }
 
     fun getIsGrounded():Boolean{

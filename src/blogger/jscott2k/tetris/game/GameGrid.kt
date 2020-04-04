@@ -2,7 +2,6 @@ package blogger.jscott2k.tetris.game
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.tetromino.Tetromino
-import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
 import blogger.jscott2k.tetris.tetromino.TetrominoTile
 import blogger.jscott2k.tetris.utils.Vec2Int
 import kotlin.math.floor
@@ -141,9 +140,9 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         println()
     }
 
-    private fun printGameDetailLine(offset:Int = 5) {
+    private fun printGameDetailLine(offset:Int = 4) {
         val spaceOffset:String = String(Array(size = offset){' '}.toCharArray())
-        print("$spaceOffset Next Tetromino:  ${GameManager.getNextPlayerScheme()}; Score: ${GameManager.getScore()}" )
+        print("$spaceOffset Next Tetromino:  ${GameManager.getNextPlayerScheme()}; Score: ${GameManager.getScore()}; Lines Cleared: ${GameManager.getLinesCleared()}" )
     }
 
     fun display() {
@@ -190,7 +189,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
         return true
     }
 
-    private fun removeEmptyTetrominos(){
+    private fun removeEmptyTetrominoes(){
         tetrominoes.removeIf{
             val shouldRemove = (it.getTilesLeft() == 0)
             if(shouldRemove){
@@ -210,32 +209,30 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             tilesAtOrAboveRow.addAll(additionalTilesAtOrAboveRow)
 
             //Only can be shiftable when at least one of the the tile are above the row
-            if(additionalTilesAtOrAboveRow.size>0){
-
+            if(additionalTilesAtOrAboveRow.size > 0){
                 println("\t\tFOUND: $additionalTilesAtOrAboveRow")
-
+                it.setIsPreservedForm(false) //Have to shift tile by tile to avoid tetrominoes colliding when shifted down
                 it.setIsGrounded(false)
-                it.setIsPreservedForm(false)
             }
         }
 
-
-
         println("\tSHIFTING TILES ABOVE ROW $rowRemoved DOWN")
         tilesAtOrAboveRow  //Tiles have to be first be sorted so that tiles further below get shifted first
-            .sortedWith(compareByDescending<TetrominoTile>{it.getPoint().x}.thenByDescending{it.parent.getIsPreservedForm()})
-            .forEachIndexed{ i: Int, it: TetrominoTile ->
+            .sortedWith(compareByDescending<TetrominoTile>{it.getPoint().x})
+            .forEach{
                 //Each tile needs to try and shift downwards. If it is unpreserved the whole parent will be shifted downwards
-                if(!it.parent.getIsPreservedForm()){
-                    it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
-                }else{
-                    it.parent.shift(Direction.DOWN) //Shift entire tetromino downwards when is preserved
-                    it.parent.setLockedInPlace(true) //Do not shift this tetromino any more in this for each. Only needs to be shifted once
-                }
-                println("\tTILE REALIGNED: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
+                println("\tTILE REALIGNED FROM: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
+                it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
+//                if(!it.parent.getIsPreservedForm()){
+//                    it.parent.shift(Direction.DOWN, it) //To shift a specific tile of an unpreserved tetromino
+//                }else{
+//                    it.parent.shift(Direction.DOWN) //Shift entire tetromino downwards when is preserved
+//                    it.parent.setLockedInPlace(true) //Do not shift this tetromino any more in this for each. Only needs to be shifted once
+//                }
+                println("\t\tTO: $it -> ${it.getPoint()}, ${it.parent.getIsPreservedForm()}")
             }
         tilesAtOrAboveRow.forEach {
-            it.parent.setLockedInPlace(false) //Unlock tetromino's previouslylocked in place by re-alignment
+//            it.parent.setLockedInPlace(false) //Unlock tetromino's previously locked
             it.parent.setIsPreservedForm((it.parent.getTiles().size==4))
         }
     }
@@ -246,7 +243,7 @@ class GameGrid(private val rows: Int, private val cols: Int) {
             val point = Vec2Int(row, col)
             //Remove all tiles in that col
             tetrominoes.forEach {
-                it.removeTileAt(point).also{tile ->
+                it.removeTileAt(point).also{ tile ->
                  if(tile!=null){
                      println("\tTILE $tile REMOVED!")
                  }
@@ -258,14 +255,14 @@ class GameGrid(private val rows: Int, private val cols: Int) {
 
         val removedRows:ArrayList<Int> = arrayListOf()
 
-        for(row:Int in rowDisplayRange.reversed()){
+        for(row:Int in rowDisplayRange){
             if(isRowFilled(row)){
 
                 //Remove tiles in the row
                 removeTilesFromRow(row)
 
-                //Remove tetrominos with 0 tiles left
-                removeEmptyTetrominos()
+                //Remove tetrominoes with 0 tiles left
+                removeEmptyTetrominoes()
 
                 //Track rows removed
                 removedRows.add(row)

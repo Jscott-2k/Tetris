@@ -11,17 +11,6 @@ data class RotationMatrix(private val matrix:Array<Array<Double>>){
         private const val CLOCKWISE_MULTIPLIER = 1
         private const val COUNTER_CLOCKWISE_MULTIPLIER = -1
 
-//        val CLOCKWISE:RotationMatrix = RotationMatrix(
-//            arrayOf(
-//                arrayOf(0.00,1.00),
-//                arrayOf(-1.00, 0.00)
-//            ))
-//        val COUNTER_CLOCKWISE:RotationMatrix = RotationMatrix(
-//            arrayOf(
-//                arrayOf(0.00,-1.00),
-//                arrayOf(1.00, 0.00))
-//        )
-
         fun createRotationMatrix(clockwise:Boolean, theta:Double):RotationMatrix{
 
             val directionMod:Int = if(clockwise) CLOCKWISE_MULTIPLIER else COUNTER_CLOCKWISE_MULTIPLIER

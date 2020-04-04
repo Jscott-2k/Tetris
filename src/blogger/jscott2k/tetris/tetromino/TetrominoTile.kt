@@ -32,7 +32,6 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
 
     private fun getTranslationStatus(direction: Direction):TileStatus {
         val potentialCollidedTile: TetrominoTile? = grid.getTileAtPoint(potentialPoint)
-
         return when {
             parent.getIsGrounded() && parent.getIsPreservedForm() -> TileStatus.GROUNDED_WITH_FORM_PRESERVED
             (!parent.getIsPreservedForm()) && (this.isGrounded) -> TileStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
