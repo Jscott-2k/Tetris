@@ -2,17 +2,16 @@ package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.enums.TileStatus
-import blogger.jscott2k.tetris.game.GameGrid
+import blogger.jscott2k.tetris.game.Tile
+import blogger.jscott2k.tetris.game.grid.Grid
 import blogger.jscott2k.tetris.utils.RotationMatrix
 import blogger.jscott2k.tetris.utils.Vec2Int
 
-class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
+class TetrominoTile(val parent: Tetromino, val grid: Grid): Tile() {
 
-    private var point: Vec2Int = Vec2Int(x = 0, y = 0)
     private var potentialPoint: Vec2Int = Vec2Int(x = 0, y = 0)
     private var isPivot:Boolean = false
     private var isGrounded:Boolean = false
-    private var tileStatus:TileStatus = TileStatus.WAITING
 
     fun setIsGrounded(isGrounded:Boolean){
         this.isGrounded = isGrounded
@@ -20,18 +19,9 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     fun getIsGrounded():Boolean{
         return this.isGrounded
     }
-    fun setPoint(row:Int, col:Int){
-        this.point = Vec2Int(row, col)
-    }
-    fun setPoint(point: Vec2Int){
-        this.point = point
-    }
-    fun getPoint(): Vec2Int {
-        return point
-    }
 
     private fun getTranslationStatus(direction: Direction):TileStatus {
-        val potentialCollidedTile: TetrominoTile? = grid.getTileAtPoint(potentialPoint)
+        val potentialCollidedTile: Tile? = grid.getTileAtPoint(potentialPoint)
         return when {
             parent.getIsGrounded() && parent.getIsPreservedForm() -> TileStatus.GROUNDED_WITH_FORM_PRESERVED
             (!parent.getIsPreservedForm()) && (this.isGrounded) -> TileStatus.GROUNDED_WITH_FORM_NOT_PRESERVED
@@ -51,7 +41,7 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     }
     private fun shift(direction: Direction, shiftPoint: Vec2Int): TileStatus {
 
-        potentialPoint = (this.point + shiftPoint)
+        potentialPoint = (super.getPoint() + shiftPoint)
         return getTranslationStatus(direction)
     }
 
@@ -63,20 +53,20 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
         }
     }
     private fun downTileTileCollision(otherTile:TetrominoTile):TileStatus{
-        if(parent.getIsPreservedForm()){
-            if(otherTile.parent == parent){
-                return TileStatus.SUCCESS
+            if(parent.getIsPreservedForm()){
+                if(otherTile.parent == parent){
+                    return TileStatus.SUCCESS
+                }
+                parent.setIsGrounded(true)
+            }else{
+                this.isGrounded = true
             }
-            parent.setIsGrounded(true)
-        }else{
-            this.isGrounded = true
-        }
-
         return TileStatus.COLLISION_WITH_TILE
     }
 
 
     private fun tileTileCollision(otherTile: TetrominoTile):TileStatus{
+
         return if(otherTile.parent == parent){
              TileStatus.SUCCESS
         }else{
@@ -85,14 +75,23 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
 
     }
 
-    private fun onTileTileCollision(direction:Direction, otherTile:TetrominoTile):TileStatus{
+    private fun onTileTileCollision(direction:Direction, otherTile:Tile):TileStatus{
 
-        return when(direction){
-            Direction.DOWN -> downTileTileCollision(otherTile)
-            Direction.RIGHT -> tileTileCollision(otherTile)
-            Direction.LEFT -> tileTileCollision(otherTile)
-            Direction.ROTATION -> tileTileCollision(otherTile)
-            else -> TileStatus.SUCCESS
+        return if(otherTile is TetrominoTile){
+            when(direction){
+                Direction.DOWN -> downTileTileCollision(otherTile)
+                Direction.RIGHT -> tileTileCollision(otherTile)
+                Direction.LEFT -> tileTileCollision(otherTile)
+                Direction.ROTATION -> tileTileCollision(otherTile)
+                else -> TileStatus.SUCCESS
+            }
+        }else{
+            if(parent.getIsPreservedForm()){
+                parent.setIsGrounded(true)
+            }else{
+                this.isGrounded = true
+            }
+            TileStatus.COLLISION_WITH_TILE
         }
     }
 
@@ -102,10 +101,10 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
     }
 
     fun prepareForShift(){
-        this.tileStatus = TileStatus.WAITING
+        super.setStatus(TileStatus.WAITING)
     }
     fun isWaitingForShift():Boolean{
-        return tileStatus == TileStatus.WAITING
+        return super.getStatus() == TileStatus.WAITING
     }
 
     fun shift(direction: Direction): TileStatus {
@@ -116,8 +115,8 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
             Direction.LEFT -> Vec2Int(x = 0, y = -1)
             else -> Vec2Int(x = 0, y = 0)
         }
-        tileStatus = shift(direction, shiftPoint)
-        return tileStatus
+        super.setStatus(shift(direction, shiftPoint))
+        return super.getStatus()
     }
 
 
@@ -128,7 +127,7 @@ class TetrominoTile(val parent: Tetromino, val grid: GameGrid){
 
 
     fun getRelativePoint():Vec2Int{
-        return (parent.getPivotTile().getPoint() - this.getPoint())
+        return parent.getPivotTile().getPoint() - getPoint()
     }
 
     fun getIsPivot(): Boolean {

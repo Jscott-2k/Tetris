@@ -18,7 +18,7 @@ data class RotationMatrix(private val matrix:Array<Array<Double>>){
             println("CREATING CLOCKWISE=$clockwise ROTATION MATRIX")
 
             return RotationMatrix(arrayOf(
-                arrayOf(round(x = cos(theta)),-round(x= directionMod*sin(theta))),
+                arrayOf(round(x = cos(theta)), -round(x = directionMod*sin(theta))),
                 arrayOf(round(x = directionMod*sin(theta)), round(x = cos(theta)))))
         }
 

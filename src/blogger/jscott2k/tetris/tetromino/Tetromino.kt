@@ -2,17 +2,17 @@ package blogger.jscott2k.tetris.tetromino
 
 import blogger.jscott2k.tetris.enums.Direction
 import blogger.jscott2k.tetris.enums.TileStatus
-import blogger.jscott2k.tetris.game.GameGrid
-import blogger.jscott2k.tetris.game.GameManager
+import blogger.jscott2k.tetris.game.grid.Grid
+import blogger.jscott2k.tetris.game.Game
 import blogger.jscott2k.tetris.utils.RotationMatrix
 import blogger.jscott2k.tetris.utils.Vec2Int
 import blogger.jscott2k.tetris.tetromino.Scheme.TetrominoScheme
 import kotlin.math.absoluteValue
 
 
-class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
+class Tetromino(private val grid: Grid, placeholder:Boolean = false){
 
-    private var scheme: TetrominoScheme = if(placeholder) TetrominoScheme.PLACE_HOLDER else GameManager.generateScheme()
+    private var scheme: TetrominoScheme = if(placeholder) TetrominoScheme.PLACE_HOLDER else Game.generateScheme()
     private var rotationIndex:Int = 0
     private val possibleRotations:Int = scheme.getMaxRotationIndex()
     private var isGrounded:Boolean = false
@@ -37,7 +37,7 @@ class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
 
 
     companion object{
-        private val placeHolderTetromino:Tetromino = Tetromino(GameManager.getGrid(), placeholder = true)
+        private val placeHolderTetromino:Tetromino = Tetromino(Game.getGrid(), placeholder = true)
         fun getPlaceHolderTetromino():Tetromino{
             return placeHolderTetromino
         }
@@ -83,8 +83,8 @@ class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
 
         rotationIndex = calculateRotationIndex(dr)
 
-        if(possibleRotations <= 1 ){ return mutableMapOf(GameManager.getDefaultTile() to TileStatus.NO_ROTATION) }
-        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED)}
+        if(possibleRotations <= 1 ){ return mutableMapOf(Game.getDefaultTile() to TileStatus.NO_ROTATION) }
+        if(lockedInPlace){return mutableMapOf(Game.getDefaultTile() to TileStatus.LOCKED)}
 
         val rotationMultiplier:Int = dr.absoluteValue.also{
             if(it>possibleRotations){println("\tROTATION MULTIPLIER TOO LARGE, REDUCING TO: $possibleRotations")}
@@ -196,8 +196,8 @@ class Tetromino(private val grid: GameGrid, placeholder:Boolean = false){
 
     fun shift(direction: Direction):MutableMap<TetrominoTile, TileStatus>{
 
-        if(lockedInPlace){return mutableMapOf(GameManager.getDefaultTile() to TileStatus.LOCKED) }
-        if(!isPreservedForm){return mutableMapOf(GameManager.getDefaultTile()  to TileStatus.FAILED_WRONG_PRESERVATION)}
+        if(lockedInPlace){return mutableMapOf(Game.getDefaultTile() to TileStatus.LOCKED) }
+        if(!isPreservedForm){return mutableMapOf(Game.getDefaultTile()  to TileStatus.FAILED_WRONG_PRESERVATION)}
 
         val tileStatuses:MutableMap<TetrominoTile, TileStatus> = mutableMapOf()
 
